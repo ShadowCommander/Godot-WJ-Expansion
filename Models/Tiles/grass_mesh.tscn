@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bt23cg4w6vubn"]
+
+[ext_resource type="Texture2D" uid="uid://ca6ldtb3w668s" path="res://Sprites/Tiles/tile_0001.png" id="1_o6cw0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t2608"]
+albedo_texture = ExtResource("1_o6cw0")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_l2wsw"]
+material = SubResource("StandardMaterial3D_t2608")
+size = Vector2(1, 1)
+
+[node name="GrassTileMesh" type="MeshInstance3D"]
+mesh = SubResource("PlaneMesh_l2wsw")
+surface_material_override/0 = SubResource("StandardMaterial3D_t2608")

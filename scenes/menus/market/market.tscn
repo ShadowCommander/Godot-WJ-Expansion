@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://cf27rn8jk7iwj"]
+
+[ext_resource type="Script" uid="uid://7m83j2vsvdhi" path="res://scenes/menus/market/market.gd" id="1_gwtxt"]
+[ext_resource type="Theme" uid="uid://ckywjkcai0hqx" path="res://scenes/menus/main_theme.tres" id="1_tn6ey"]
+[ext_resource type="Texture2D" uid="uid://3umi5bstt5nj" path="res://assets/textures/ui/icon_cross.png" id="2_jvt3k"]
+[ext_resource type="PackedScene" uid="uid://ciwq8siqk71qj" path="res://addons/lazy_list_box/lazy_list_box.tscn" id="4_nlb6l"]
+[ext_resource type="PackedScene" uid="uid://btwdv6g12nfui" path="res://scenes/menus/custom_controls/item_template.tscn" id="5_wbloq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xtht8"]
+
+[node name="Market" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gwtxt")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+theme = ExtResource("1_tn6ey")
+theme_type_variation = &"MarginPanelContainer"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_xtht8")
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_tn6ey")
+theme_type_variation = &"HeaderLarge"
+text = "Market"
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("1_tn6ey")
+
+[node name="TextureButton" type="TextureButton" parent="CenterContainer/PanelContainer/VBoxContainer/PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 8
+texture_normal = ExtResource("2_jvt3k")
+stretch_mode = 5
+
+[node name="TabContainer" type="TabContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+
+[node name="LazyListBox" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer" instance=ExtResource("4_nlb6l")]
+layout_mode = 2
+item_template = ExtResource("5_wbloq")
+metadata/_tab_index = 0

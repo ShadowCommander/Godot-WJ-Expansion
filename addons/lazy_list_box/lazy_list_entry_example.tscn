@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://befnl3k856h5a"]
+
+[ext_resource type="Script" uid="uid://4ks5gscnwdku" path="res://addons/lazy_list_box/lazy_list_entry.gd" id="1_mn6nc"]
+
+[node name="LazyListEntryExample" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 50)
+offset_right = 8.0
+offset_bottom = 50.0
+script = ExtResource("1_mn6nc")
+metadata/_custom_type_script = "uid://4ks5gscnwdku"

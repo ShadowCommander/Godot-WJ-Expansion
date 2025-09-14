@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://btwdv6g12nfui"]
+
+[ext_resource type="Script" uid="uid://c6lppgk1vq8at" path="res://scenes/menus/custom_controls/item_entry.gd" id="1_7ibqk"]
+[ext_resource type="Texture2D" uid="uid://dy152pm8w1hyb" path="res://icon.svg" id="2_7ibqk"]
+
+[node name="ItemTemplate" type="PanelContainer" node_paths=PackedStringArray("icon_texture_rect", "name_label", "price_label")]
+custom_minimum_size = Vector2(0, 23)
+offset_right = 159.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+script = ExtResource("1_7ibqk")
+icon_texture_rect = NodePath("HBoxContainer/TextureRect")
+name_label = NodePath("HBoxContainer/ProductLabel")
+price_label = NodePath("HBoxContainer/PriceLabel")
+metadata/_custom_type_script = "uid://c6lppgk1vq8at"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_7ibqk")
+expand_mode = 2
+
+[node name="ProductLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Gelbel Seed"
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="PriceLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "$10"

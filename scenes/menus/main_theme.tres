@@ -1,0 +1,21 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://ckywjkcai0hqx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tdmgd"]
+bg_color = Color(0.314316, 0.314316, 0.314316, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.641211, 0.422363, 0.0344897, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[resource]
+MarginContainer/constants/margin_bottom = 4
+MarginContainer/constants/margin_left = 4
+MarginContainer/constants/margin_right = 4
+MarginContainer/constants/margin_top = 4
+MarginPanelContainer/base_type = &"PanelContainer"
+MarginPanelContainer/styles/panel = SubResource("StyleBoxFlat_tdmgd")

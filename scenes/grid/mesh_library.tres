@@ -1,7 +1,7 @@
 [gd_resource type="MeshLibrary" load_steps=13 format=3 uid="uid://b2xjwjx1f453m"]
 
-[ext_resource type="Texture2D" uid="uid://ca6ldtb3w668s" path="res://assets/sprites/tiles/tile_0001.png" id="1_ttoue"]
-[ext_resource type="Texture2D" uid="uid://dg6xea8t1tovq" path="res://assets/sprites/tiles/tile_42.png" id="2_44vqp"]
+[ext_resource type="Texture2D" uid="uid://ca6ldtb3w668s" path="res://assets/textures/sprites/tiles/tile_0001.png" id="1_ttoue"]
+[ext_resource type="Texture2D" uid="uid://dg6xea8t1tovq" path="res://assets/textures/sprites/tiles/tile_42.png" id="2_44vqp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xoxix"]
 albedo_texture = ExtResource("1_ttoue")

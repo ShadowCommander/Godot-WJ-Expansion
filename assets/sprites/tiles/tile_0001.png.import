@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kcquhgteiryc"
-path.s3tc="res://.godot/imported/tile_0109.png-b74fcbd6de20fc8bbf6b3173895cb448.s3tc.ctex"
+uid="uid://ca6ldtb3w668s"
+path.s3tc="res://.godot/imported/tile_0001.png-1a1b13b481433bcdfb89c8d1b2874432.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Sprites/Tiles/tile_0109.png"
-dest_files=["res://.godot/imported/tile_0109.png-b74fcbd6de20fc8bbf6b3173895cb448.s3tc.ctex"]
+source_file="res://assets/sprites/tiles/tile_0001.png"
+dest_files=["res://.godot/imported/tile_0001.png-1a1b13b481433bcdfb89c8d1b2874432.s3tc.ctex"]
 
 [params]
 
@@ -22,7 +22,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

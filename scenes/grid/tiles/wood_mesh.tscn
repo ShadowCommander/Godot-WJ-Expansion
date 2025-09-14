@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://kxklgdef4b0k"]
 
-[ext_resource type="Texture2D" uid="uid://dg6xea8t1tovq" path="res://Sprites/Tiles/tile_42.png" id="1_s8183"]
+[ext_resource type="Texture2D" uid="uid://dg6xea8t1tovq" path="res://assets/sprites/tiles/tile_42.png" id="1_s8183"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_s8183"]
 

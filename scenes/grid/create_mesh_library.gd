@@ -7,7 +7,7 @@ extends EditorScript
 ## 3. Click File -> Run
 ## 4. Drag mesh_library into the 
 
-var destination = "res://Models/mesh_library.tres"
+var destination = "res://scenes/grid/mesh_library.tres"
 
 func _run() -> void:
 	create_library()

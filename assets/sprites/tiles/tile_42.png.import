@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dg6xea8t1tovq"
-path.s3tc="res://.godot/imported/tile_42.png-86d8ab2fab3b4cce06d058771e3cef96.s3tc.ctex"
+path.s3tc="res://.godot/imported/tile_42.png-c079bdc22780730fb330228a01312acc.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Sprites/Tiles/tile_42.png"
-dest_files=["res://.godot/imported/tile_42.png-86d8ab2fab3b4cce06d058771e3cef96.s3tc.ctex"]
+source_file="res://assets/sprites/tiles/tile_42.png"
+dest_files=["res://.godot/imported/tile_42.png-c079bdc22780730fb330228a01312acc.s3tc.ctex"]
 
 [params]
 

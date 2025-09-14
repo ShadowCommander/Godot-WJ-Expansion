@@ -1,9 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://3up4gouqf7ks"]
+[gd_scene load_steps=4 format=3 uid="uid://3up4gouqf7ks"]
 
 [ext_resource type="MeshLibrary" uid="uid://b2xjwjx1f453m" path="res://scenes/grid/mesh_library.tres" id="1_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://ciwq8siqk71qj" path="res://addons/lazy_list_box/lazy_list_box.tscn" id="3_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://dy152pm8w1hyb" path="res://icon.svg" id="3_h2yge"]
-[ext_resource type="PackedScene" uid="uid://befnl3k856h5a" path="res://addons/lazy_list_box/lazy_list_entry_example.tscn" id="4_lquwl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lquwl"]
 
@@ -20,7 +18,7 @@ data = {
 }
 
 [node name="Camera3D" type="Camera3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 0.805742, 0.592266, 0, -0.592266, 0.805742, 0, 1.45178, 2)
+transform = Transform3D(1, 0, 0, 0, 0.931577, 0.363544, 0, -0.363544, 0.931577, 0, 2.45178, 6)
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="Node3D"]
 
@@ -33,7 +31,4 @@ offset = Vector2(0, 64)
 billboard = 1
 texture = ExtResource("3_h2yge")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="LazyListBox" parent="CanvasLayer" instance=ExtResource("3_1bvp3")]
-item_template = ExtResource("4_lquwl")
+[node name="UICanvasLayer" type="CanvasLayer" parent="."]

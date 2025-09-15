@@ -1,9 +1,41 @@
-[gd_scene load_steps=4 format=3 uid="uid://3up4gouqf7ks"]
+[gd_scene load_steps=11 format=3 uid="uid://3up4gouqf7ks"]
 
 [ext_resource type="MeshLibrary" uid="uid://b2xjwjx1f453m" path="res://Models/mesh_library.tres" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://cydth0ft0adqg" path="res://plants/plant_grow.gd" id="3_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://dy152pm8w1hyb" path="res://icon.svg" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://gjeosdwampg0" path="res://Sprites/Alien Plant.png" id="3_lquwl"]
+[ext_resource type="Resource" uid="uid://d33hgg2xivktq" path="res://resources/data/daxon_plant.tres" id="4_1bvp3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lquwl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bvp3"]
+atlas = ExtResource("3_lquwl")
+region = Rect2(2000, 0, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lquwl"]
+atlas = ExtResource("3_lquwl")
+region = Rect2(1000, 0, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7mycd"]
+atlas = ExtResource("3_lquwl")
+region = Rect2(0, 0, 1000, 1000)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lquwl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1bvp3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lquwl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7mycd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
 
 [node name="Main" type="Node"]
 
@@ -30,3 +62,12 @@ shape = SubResource("CapsuleShape3D_lquwl")
 offset = Vector2(0, 64)
 billboard = 1
 texture = ExtResource("3_h2yge")
+
+[node name="Plants" type="Node3D" parent="Node3D"]
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Node3D/Plants"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 1.1731, 0, 0)
+offset = Vector2(0, 400)
+sprite_frames = SubResource("SpriteFrames_lquwl")
+script = ExtResource("3_1bvp3")
+plant_resource = ExtResource("4_1bvp3")

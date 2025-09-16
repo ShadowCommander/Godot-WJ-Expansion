@@ -7,6 +7,8 @@ extends EditorScript
 ## 3. Click File -> Run
 ## 4. Drag mesh_library into the 
 
+const TILESET_MESH_LIBRARY = preload("res://Models/tileset_mesh_library.tscn")
+var target = "res://Models/tileset_mesh_library.tscn"
 var destination = "res://Models/mesh_library.tres"
 
 func _run() -> void:
@@ -16,7 +18,6 @@ func create_library() -> void:
 	if not Engine.is_editor_hint():
 		return
 	
-	var root = get_scene()
 	var library = MeshLibrary.new()
 	
 	if ResourceLoader.exists(destination):
@@ -26,6 +27,8 @@ func create_library() -> void:
 		print_rich("Creating new MeshLibrary [b]%s[/b]" % [destination])
 		library = MeshLibrary.new()
 	
+	var mesh_library_scene = TILESET_MESH_LIBRARY.instantiate()
+	var root = mesh_library_scene
 	var children = root.get_children()
 	print(children)
 	for c: Node in children:
@@ -43,7 +46,6 @@ func create_library() -> void:
 		print("material: ", mesh.material)
 		library.set_item_mesh(id, mesh)
 		var transform: Transform3D = Transform3D.IDENTITY
-		transform.basis = child.transform.basis.inverse()
 		library.set_item_mesh_transform(id, transform)
 		library.set_item_navigation_mesh_transform(id, transform)
 		library.set_item_shapes(id, [child.mesh.create_convex_shape(), Transform3D.IDENTITY])

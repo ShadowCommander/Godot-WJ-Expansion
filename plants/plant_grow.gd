@@ -1,4 +1,5 @@
 extends AnimatedSprite3D
+class_name Plant
 
 @export var plant_resource: PlantResource
 

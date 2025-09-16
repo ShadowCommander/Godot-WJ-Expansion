@@ -18,7 +18,9 @@ func _physics_process(delta):
 	input_dir = input_dir.normalized()
 	velocity.x = input_dir.x * speed
 	velocity.z = input_dir.z * speed
-	move_and_slide()
+	if not input_dir.is_zero_approx():
+		print(input_dir)
+	print("Colliding: ", move_and_slide())
 
 	if input_dir == Vector3.ZERO:
 		sprite.play("idle")

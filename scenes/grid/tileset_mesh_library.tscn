@@ -12,14 +12,14 @@ albedo_texture = ExtResource("2_sur7u")
 texture_filter = 0
 
 [node name="Library" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 
 [node name="GrassTileMesh" parent="." instance=ExtResource("1_go2t5")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("QuadMesh_p3451")
 surface_material_override/0 = SubResource("StandardMaterial3D_t2608")
 
 [node name="WoodTileMesh" parent="." instance=ExtResource("2_oild2")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 
 [node name="MossTileMesh" parent="." instance=ExtResource("4_sur7u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)

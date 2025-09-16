@@ -44,10 +44,12 @@ func create_library() -> void:
 		mesh.surface_set_material(0, child.get_surface_override_material(0).duplicate())
 		print("material: ", mesh.material)
 		library.set_item_mesh(id, mesh)
+		print("Id: ", id, ", transform: ", library.get_item_mesh_transform(id))
 		var transform: Transform3D = Transform3D.IDENTITY
+		transform.basis = Basis(Vector3(1, 0, 0), Vector3(0, 0, -1), Vector3(0, 1, 0))
 		library.set_item_mesh_transform(id, transform)
 		library.set_item_navigation_mesh_transform(id, transform)
-		library.set_item_shapes(id, [child.mesh.create_convex_shape(), Transform3D.IDENTITY])
+		#library.set_item_shapes(id, [child.mesh.create_convex_shape(), Transform3D.IDENTITY])
 		library.set_item_preview(id, EditorInterface.make_mesh_previews([child.mesh], 50)[0])
 	var err = ResourceSaver.save(library, destination, ResourceSaver.FLAG_REPLACE_SUBRESOURCE_PATHS)
 	

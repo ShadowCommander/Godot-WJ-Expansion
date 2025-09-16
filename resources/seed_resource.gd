@@ -1,4 +1,4 @@
-extends Node
+extends Resource
 class_name SeedResource
 
 @export var display_name: String

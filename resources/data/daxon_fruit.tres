@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ProduceResource" load_steps=2 format=3 uid="uid://bb5nuvskv2ea3"]
+
+[ext_resource type="Script" uid="uid://ceep12fx8vbxm" path="res://resources/produce_resource.gd" id="1_dfm3i"]
+
+[resource]
+script = ExtResource("1_dfm3i")
+display_name = "Daxon Fruit"
+metadata/_custom_type_script = "uid://ceep12fx8vbxm"

@@ -1,13 +1,14 @@
-[gd_scene load_steps=51 format=3 uid="uid://dbqvf4v1f1djf"]
+[gd_scene load_steps=53 format=3 uid="uid://dbqvf4v1f1djf"]
 
 [ext_resource type="Texture2D" uid="uid://ca6ldtb3w668s" path="res://assets/textures/sprites/tiles/tile_0001.png" id="1_7mycd"]
 [ext_resource type="Texture2D" uid="uid://dg6xea8t1tovq" path="res://assets/textures/sprites/tiles/tile_42.png" id="2_272bh"]
 [ext_resource type="Script" uid="uid://cfkfhnegtrouu" path="res://scenes/Player/player.gd" id="3_5vw27"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="4_7mycd"]
 [ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="5_272bh"]
-[ext_resource type="Script" path="res://scenes/UI/hud.gd" id="5_kek77"]
+[ext_resource type="Script" uid="uid://bvuensdwm7vji" path="res://scenes/UI/hud.gd" id="5_kek77"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="6_5vw27"]
 [ext_resource type="PackedScene" uid="uid://bius36l10e1e1" path="res://scenes/UI/shop/simple_shop.tscn" id="7_4c57u"]
+[ext_resource type="Shader" uid="uid://cvxxqj4pj5s5e" path="res://scripts/shaders/sky.gdshader" id="7_kek77"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xoxix"]
 albedo_texture = ExtResource("1_7mycd")
@@ -273,12 +274,77 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1bvp3"]
-sky_top_color = Color(0.588299, 0.5768189, 0.5880325, 1)
-sky_horizon_color = Color(0.6844308, 0.69182515, 0.7066128, 1)
+[sub_resource type="GDScript" id="GDScript_5vw27"]
+script/source = "extends HBoxContainer
+
+var shop_panel : Control = null
+var hotbar_buttons : Array[Button] = []
+
+func _ready() -> void:
+	shop_panel = %ShopPanelContainer
+	call_deferred(\"setup_connection\")
+
+func setup_connection() -> void:
+	if shop_panel and shop_panel.inventory_manager:
+		shop_panel.inventory_manager.slot_modified.connect(_on_inventory_changed)
+		refresh_hotbar()
+	else:
+		call_deferred(\"setup_connection\")
+
+func _on_inventory_changed(_slot_number : int) -> void:
+	refresh_hotbar()
+
+func refresh_hotbar() -> void:
+	for button in hotbar_buttons:
+		if is_instance_valid(button):
+			button.queue_free()
+	hotbar_buttons.clear()
+
+	if not shop_panel or not shop_panel.inventory_manager:
+		return
+
+	var items_added : int = 0
+
+	for slot_number : int in shop_panel.inventory_manager.slots():
+		if shop_panel.inventory_manager.is_slot_empty(slot_number):
+			continue
+
+		var item_id : int = shop_panel.inventory_manager.get_slot_item_id(slot_number)
+		var item_amount : int = shop_panel.inventory_manager.get_slot_item_amount(slot_number)
+		var item_name : String = shop_panel.item_registry.get_name(item_id)
+		var item_icon : Texture2D = shop_panel.item_registry.get_icon(item_id)
+
+		if item_name == \"\" or item_icon == null:
+			continue
+
+		var skip_ids = [
+			shop_panel.item_ids.GOLD_COIN,
+			10
+		]
+		if item_id in skip_ids:
+			continue
+
+		var button : Button = Button.new()
+		button.text = str(item_amount)
+		button.icon = item_icon
+		button.custom_minimum_size = Vector2(60, 60)
+		button.tooltip_text = \"%s (%d)\" % [item_name, item_amount]
+
+		add_child(button)
+		hotbar_buttons.append(button)
+		items_added += 1
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4c57u"]
+shader = ExtResource("7_kek77")
+shader_parameter/deep_space = Color(0.14822277, 0.105295114, 0.22828126, 1)
+shader_parameter/horizon_space = Color(0.23125899, 0.13730425, 0.30637267, 1)
+shader_parameter/nebula_tint = Color(0.21301654, 0.12063307, 0.17706272, 1)
+shader_parameter/star_amount = 0.4
+shader_parameter/nebula_strength = 0.3
 
 [sub_resource type="Sky" id="Sky_lquwl"]
-sky_material = SubResource("ProceduralSkyMaterial_1bvp3")
+sky_material = SubResource("ShaderMaterial_4c57u")
 
 [sub_resource type="Environment" id="Environment_0xm2m"]
 background_mode = 2
@@ -304,7 +370,7 @@ data = {
 }
 
 [node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("sprite")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.82401264, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.041113257, 0)
 script = ExtResource("3_5vw27")
 sprite = NodePath("AnimatedSprite3D")
 
@@ -322,7 +388,7 @@ autoplay = "idle"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 physics_interpolation_mode = 1
-transform = Transform3D(0.99999934, 0, 0, 0, 0.93407273, 0.3570738, 0, -0.3570738, 0.93407273, 0, 3.0240126, 5.755)
+transform = Transform3D(1, 0, 0, 0, 0.9340757, 0.35707498, 0, -0.35707498, 0.9340757, 0, 2.2411132, 5.755)
 
 [node name="PhantomCameraHost2" type="Node" parent="Camera3D"]
 process_priority = 300
@@ -334,19 +400,26 @@ metadata/_custom_type_script = "uid://bd046eokvcnu2"
 script = ExtResource("5_kek77")
 inventory_menu = NodePath("ShopPanelContainer")
 
+[node name="HotbarContainer" type="HBoxContainer" parent="Camera3D/HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 496.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = SubResource("GDScript_5vw27")
+
 [node name="ShopPanelContainer" parent="Camera3D/HUD" instance=ExtResource("7_4c57u")]
+unique_name_in_owner = true
 visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0xm2m")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.43115, 0)
-light_color = Color(1, 1, 0.94509804, 1)
-shadow_enabled = true
-
 [node name="PhantomCamera3D" type="Node3D" parent="." node_paths=PackedStringArray("follow_target", "look_at_target")]
-transform = Transform3D(0.99999934, 0, 0, 0, 0.93407273, 0.3570738, 0, -0.3570738, 0.93407273, 0, 3.0240126, 5.755)
+transform = Transform3D(0.99999934, 0, 0, 0, 0.93407273, 0.3570738, 0, -0.3570738, 0.93407273, 0, 2.2411132, 5.755)
 top_level = true
 script = ExtResource("5_272bh")
 follow_mode = 2

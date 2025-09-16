@@ -25,7 +25,7 @@ enum item_ids {
 func _ready() -> void:
 	# Create a list of item, name, description, and icons:
 	var script : GDScript = get_script()
-	var base_icon_path : String = "res://scenes/inventory_icons/items.atlas_textures/"
+	var base_icon_path : String = "res://assets/inventory_icons/items.atlas_textures/"
 	var item_list : Array[Array] = [
 			[
 				item_ids.WHEAT_SEEDS, "Wheat Seeds",

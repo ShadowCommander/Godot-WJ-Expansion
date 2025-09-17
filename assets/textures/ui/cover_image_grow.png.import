@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhc4stq88nf0"
-path.s3tc="res://.godot/imported/tile_0000.png-b90b7144e85d1c2038395415c5c96a6c.s3tc.ctex"
+uid="uid://dwa8h4xwago37"
+path="res://.godot/imported/cover_image_grow.png-cbf2bb921f714f9b8d6375a1ed27d3ac.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/sprites/tiles/tile_0000.png"
-dest_files=["res://.godot/imported/tile_0000.png-b90b7144e85d1c2038395415c5c96a6c.s3tc.ctex"]
+source_file="res://assets/textures/ui/cover_image_grow.png"
+dest_files=["res://.godot/imported/cover_image_grow.png-cbf2bb921f714f9b8d6375a1ed27d3ac.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -38,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

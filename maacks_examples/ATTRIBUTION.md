@@ -2,8 +2,8 @@
 ## Collaborators
 
 ### Role
-Person 1  
-Person 2  
+ShadowCommander  - Project manager, lead developer
+psychowolf - developer
 [Person w/ Link]()  
 
 ## Sourced

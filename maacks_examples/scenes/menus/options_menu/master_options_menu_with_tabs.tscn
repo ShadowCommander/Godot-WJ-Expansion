@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://dxq001dyqv43j"]
 
-[ext_resource type="PackedScene" path="res://addons/maaacks_game_template/base/scenes/menus/options_menu/master_options_menu.tscn" id="1_nf5m8"]
-[ext_resource type="Script" path="res://maacks_examples/scenes/menus/options_menu/master_options_menu.gd" id="2_k1vs4"]
-[ext_resource type="PackedScene" path="res://maacks_examples/scenes/menus/options_menu/input/input_options_menu.tscn" id="3_25rfw"]
-[ext_resource type="PackedScene" path="res://maacks_examples/scenes/menus/options_menu/input/input_extras_menu.tscn" id="4_tlsjo"]
-[ext_resource type="PackedScene" path="res://maacks_examples/scenes/menus/options_menu/audio/audio_options_menu.tscn" id="5_rx5b6"]
-[ext_resource type="PackedScene" path="res://maacks_examples/scenes/menus/options_menu/video/video_options_menu_with_extras.tscn" id="6_5yawa"]
-[ext_resource type="PackedScene" path="res://maacks_examples/scenes/menus/options_menu/game/game_options_menu.tscn" id="7_ohf2k"]
+[ext_resource type="PackedScene" uid="uid://bvwl11s2p0hd" path="res://addons/maaacks_game_template/base/scenes/menus/options_menu/master_options_menu.tscn" id="1_nf5m8"]
+[ext_resource type="Script" uid="uid://b44cue482oaey" path="res://maacks_examples/scenes/menus/options_menu/master_options_menu.gd" id="2_k1vs4"]
+[ext_resource type="PackedScene" uid="uid://c2py63tq7apbd" path="res://maacks_examples/scenes/menus/options_menu/input/input_options_menu.tscn" id="3_25rfw"]
+[ext_resource type="PackedScene" uid="uid://bl4ora58m7v07" path="res://maacks_examples/scenes/menus/options_menu/input/input_extras_menu.tscn" id="4_tlsjo"]
+[ext_resource type="PackedScene" uid="uid://dxo41i4l8a2vy" path="res://maacks_examples/scenes/menus/options_menu/audio/audio_options_menu.tscn" id="5_rx5b6"]
+[ext_resource type="PackedScene" uid="uid://bq1k0lny3u1dl" path="res://maacks_examples/scenes/menus/options_menu/video/video_options_menu_with_extras.tscn" id="6_5yawa"]
+[ext_resource type="PackedScene" uid="uid://bvrgfo60s262t" path="res://maacks_examples/scenes/menus/options_menu/game/game_options_menu.tscn" id="7_ohf2k"]
 
 [node name="MasterOptionsMenu" instance=ExtResource("1_nf5m8")]
 script = ExtResource("2_k1vs4")

@@ -5,4 +5,6 @@
 [resource]
 script = ExtResource("1_g7313")
 action_value_type = 3
+is_remappable = true
+display_name = "Movement"
 metadata/_custom_type_script = "uid://cluhc11vixkf1"

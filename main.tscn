@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://dbqvf4v1f1djf"]
+[gd_scene load_steps=52 format=3 uid="uid://dbqvf4v1f1djf"]
 
 [ext_resource type="MeshLibrary" uid="uid://cy0jkyme5e54e" path="res://scenes/grid/mesh_library.tres" id="1_5vw27"]
 [ext_resource type="Script" uid="uid://n2b6xu6p3fsc" path="res://world.gd" id="1_dg77c"]
@@ -15,6 +15,7 @@
 [ext_resource type="Resource" uid="uid://gatsbse3jkwk" path="res://resources/guide/look_absolute.tres" id="14_vivmo"]
 [ext_resource type="PackedScene" uid="uid://dkr80d2pi0d41" path="res://addons/guide/debugger/guide_debugger.tscn" id="14_w48qg"]
 [ext_resource type="Script" uid="uid://c7b7wwdc8kkrl" path="res://scenes/grid/plant_grid_system.gd" id="15_vivmo"]
+[ext_resource type="Resource" uid="uid://c6173jayb8uuj" path="res://resources/guide/interact.tres" id="16_2cqfq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4c57u"]
 shader = ExtResource("7_kek77")
@@ -31,7 +32,7 @@ sky_material = SubResource("ShaderMaterial_4c57u")
 background_mode = 2
 sky = SubResource("Sky_lquwl")
 ambient_light_source = 2
-ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_color = Color(1, 0.6799758, 0.5873669, 1)
 glow_enabled = true
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.02
@@ -333,6 +334,8 @@ data = {
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/GridMap/StaticBody3D"]
 shape = SubResource("WorldBoundaryShape3D_w48qg")
 
+[node name="PlantContainer" type="Node3D" parent="World"]
+
 [node name="Player" type="CharacterBody3D" parent="World" node_paths=PackedStringArray("sprite")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.041113257, 0)
 script = ExtResource("3_5vw27")
@@ -345,6 +348,7 @@ shape = SubResource("CapsuleShape3D_lquwl")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="World/Player"]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0.808705, 0)
+visible = false
 billboard = 2
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_lquwl")
@@ -353,7 +357,7 @@ autoplay = "idle"
 
 [node name="Camera3D" type="Camera3D" parent="World"]
 physics_interpolation_mode = 1
-transform = Transform3D(1, 0, 0, 0, 0.42058587, 0.9072527, 0, -0.9072527, 0.42058587, 0, 5.8761134, 2.705)
+transform = Transform3D(1, 0, 0, 0, 0.79999995, 0.59999996, 0, -0.59999996, 0.79999995, 0, 3.0411134, 4)
 
 [node name="PhantomCameraHost2" type="Node" parent="World/Camera3D"]
 process_priority = 300
@@ -362,7 +366,7 @@ script = ExtResource("4_7mycd")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
 [node name="PhantomCamera3D" type="Node3D" parent="World" node_paths=PackedStringArray("follow_target", "look_at_target")]
-transform = Transform3D(0.99999934, 0, 0, 0, 0.42058328, 0.9072472, 0, -0.9072472, 0.42058328, 0, 5.8761134, 2.705)
+transform = Transform3D(0.99999934, 0, 0, 0, 0.79996663, 0.599975, 0, -0.599975, 0.79996663, 0, 3.0411134, 4)
 top_level = true
 script = ExtResource("5_272bh")
 follow_mode = 2
@@ -370,7 +374,7 @@ follow_target = NodePath("../Player")
 look_at_mode = 2
 look_at_target = NodePath("../Player")
 tween_resource = SubResource("Resource_kek77")
-follow_offset = Vector3(0, 5.835, 2.705)
+follow_offset = Vector3(0, 3, 4)
 metadata/_custom_type_script = "uid://csjccrhj5wnx7"
 
 [node name="SelectionHighlight" type="MeshInstance3D" parent="World"]
@@ -405,12 +409,14 @@ visible = false
 
 [node name="Systems" type="Node" parent="."]
 
-[node name="PlantGridSystem" type="Node" parent="Systems" node_paths=PackedStringArray("grid_map")]
+[node name="PlantGridSystem" type="Node" parent="Systems" node_paths=PackedStringArray("grid_map", "plant_container")]
 script = ExtResource("15_vivmo")
 grid_map = NodePath("../../World/GridMap")
+plant_container = NodePath("../../World/PlantContainer")
 
 [node name="InteractionSystem" type="Node" parent="Systems" node_paths=PackedStringArray("player", "selection_highlight")]
 script = ExtResource("9_kek77")
 look_absolute = ExtResource("14_vivmo")
+interact = ExtResource("16_2cqfq")
 player = NodePath("../../World/Player")
 selection_highlight = NodePath("../../World/SelectionHighlight")

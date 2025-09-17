@@ -30,6 +30,7 @@ order = 1
 
 [sub_resource type="Resource" id="Resource_23d5w"]
 script = ExtResource("3_hk65h")
+is_remappable = true
 input = SubResource("Resource_vblxl")
 modifiers = Array[ExtResource("5_moqdx")]([SubResource("Resource_na7sv"), SubResource("Resource_7632g")])
 
@@ -42,6 +43,7 @@ script = ExtResource("6_2klfp")
 
 [sub_resource type="Resource" id="Resource_jbstm"]
 script = ExtResource("3_hk65h")
+is_remappable = true
 input = SubResource("Resource_tb0lm")
 modifiers = Array[ExtResource("5_moqdx")]([SubResource("Resource_a5y3c")])
 
@@ -55,6 +57,7 @@ order = 1
 
 [sub_resource type="Resource" id="Resource_ak67m"]
 script = ExtResource("3_hk65h")
+is_remappable = true
 input = SubResource("Resource_too46")
 modifiers = Array[ExtResource("5_moqdx")]([SubResource("Resource_768wy")])
 
@@ -64,6 +67,7 @@ key = 68
 
 [sub_resource type="Resource" id="Resource_seyn0"]
 script = ExtResource("3_hk65h")
+is_remappable = true
 input = SubResource("Resource_cy4g1")
 
 [sub_resource type="Resource" id="Resource_s8wi1"]
@@ -79,6 +83,7 @@ order = 2
 
 [sub_resource type="Resource" id="Resource_2klfp"]
 script = ExtResource("3_hk65h")
+is_remappable = true
 input = SubResource("Resource_s8wi1")
 modifiers = Array[ExtResource("5_moqdx")]([SubResource("Resource_kxf7x"), SubResource("Resource_moqdx")])
 

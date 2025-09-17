@@ -4,5 +4,6 @@ class_name PlantResource
 @export var display_name: String
 @export var maturation_time: float
 @export var sprite: Texture
+@export var sprite_frames: SpriteFrames
 # Dictionary of produce and amount to spawn
 @export var produce: Dictionary[ProduceResource, int]

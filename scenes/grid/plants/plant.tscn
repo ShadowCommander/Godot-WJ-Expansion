@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dufdya5b5ivea"]
+
+[ext_resource type="SpriteFrames" uid="uid://cmsh0sloyy3mv" path="res://resources/data/zen_plant_sprite_frames.tres" id="1_amb1i"]
+[ext_resource type="Script" uid="uid://cydth0ft0adqg" path="res://scenes/grid/plants/plant_grow.gd" id="1_iiemg"]
+
+[node name="Plant" type="AnimatedSprite3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+offset = Vector2(0, 500)
+texture_filter = 0
+sprite_frames = ExtResource("1_amb1i")
+speed_scale = 0.0
+script = ExtResource("1_iiemg")

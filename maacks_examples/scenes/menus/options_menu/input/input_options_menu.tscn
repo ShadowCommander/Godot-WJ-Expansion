@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2py63tq7apbd"]
+
+[ext_resource type="PackedScene" path="res://addons/maaacks_game_template/base/scenes/menus/options_menu/input/input_options_menu.tscn" id="1_48ww0"]
+[ext_resource type="Script" path="res://maacks_examples/scenes/menus/options_menu/input/input_options_menu.gd" id="2_s4ma7"]
+[ext_resource type="PackedScene" path="res://maacks_examples/scenes/menus/options_menu/input/input_icon_mapper.tscn" id="3_d21if"]
+
+[node name="Controls" instance=ExtResource("1_48ww0")]
+script = ExtResource("2_s4ma7")
+
+[node name="InputActionsList" parent="VBoxContainer/InputMappingContainer" index="1" node_paths=PackedStringArray("input_icon_mapper")]
+input_icon_mapper = NodePath("../../../InputIconMapper")
+
+[node name="InputActionsTree" parent="VBoxContainer/InputMappingContainer" index="2" node_paths=PackedStringArray("input_icon_mapper")]
+input_icon_mapper = NodePath("../../../InputIconMapper")
+
+[node name="InputIconMapper" parent="." index="6" instance=ExtResource("3_d21if")]

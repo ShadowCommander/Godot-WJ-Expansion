@@ -15,10 +15,18 @@ run/main_scene="uid://dbqvf4v1f1djf"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://maacks_examples/default_bus_layout.tres"
+
 [autoload]
 
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 GUIDE="*res://addons/guide/guide.gd"
+AppConfig="*res://addons/maaacks_game_template/base/scenes/autoloads/app_config.tscn"
+SceneLoader="*res://addons/maaacks_game_template/base/scenes/autoloads/scene_loader.tscn"
+ProjectMusicController="*res://addons/maaacks_game_template/base/scenes/autoloads/project_music_controller.tscn"
+ProjectUISoundController="*res://addons/maaacks_game_template/base/scenes/autoloads/project_ui_sound_controller.tscn"
 
 [dotnet]
 
@@ -26,7 +34,7 @@ project/assembly_name="Expansion"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/guide/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/rubonnek.inventory_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/guide/plugin.cfg", "res://addons/maaacks_game_template/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/rubonnek.inventory_manager/plugin.cfg")
 
 [file_customization]
 
@@ -42,6 +50,10 @@ folder_colors={
 [filesystem]
 
 import/blender/enabled=false
+
+[gui]
+
+theme/custom="res://maacks_examples/resources/themes/grow.tres"
 
 [input]
 
@@ -75,6 +87,17 @@ interact={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":69,"key_label":0,"unicode":101,"location":0,"echo":false,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://addons/maaacks_game_template/base/translations/menus_translations.en.translation", "res://addons/maaacks_game_template/base/translations/menus_translations.fr.translation")
+
+[maaacks_game_template]
+
+disable_install_audio_busses=true
+disable_update_check=false
+disable_install_wizard=true
+copy_path="res://maacks_examples/"
 
 [physics]
 

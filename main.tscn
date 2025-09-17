@@ -1,7 +1,7 @@
 [gd_scene load_steps=53 format=3 uid="uid://dbqvf4v1f1djf"]
 
 [ext_resource type="MeshLibrary" uid="uid://cy0jkyme5e54e" path="res://scenes/grid/mesh_library.tres" id="1_5vw27"]
-[ext_resource type="Script" uid="uid://n2b6xu6p3fsc" path="res://world.gd" id="1_dg77c"]
+[ext_resource type="Script" path="res://world.gd" id="1_dg77c"]
 [ext_resource type="Resource" uid="uid://cw7yf0noamm8s" path="res://resources/guide/mapping_contexts/walk_mode.tres" id="2_ycdy4"]
 [ext_resource type="Script" uid="uid://cfkfhnegtrouu" path="res://scenes/Player/player.gd" id="3_5vw27"]
 [ext_resource type="Resource" uid="uid://dhaqrufgx2w61" path="res://resources/guide/move.tres" id="3_efxa6"]

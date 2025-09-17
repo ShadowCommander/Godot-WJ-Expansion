@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://dbqvf4v1f1djf"]
+[gd_scene load_steps=47 format=3 uid="uid://dbqvf4v1f1djf"]
 
 [ext_resource type="MeshLibrary" uid="uid://cy0jkyme5e54e" path="res://scenes/grid/mesh_library.tres" id="1_5vw27"]
 [ext_resource type="Script" uid="uid://n2b6xu6p3fsc" path="res://world.gd" id="1_dg77c"]
@@ -12,9 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bius36l10e1e1" path="res://scenes/UI/shop/simple_shop.tscn" id="7_4c57u"]
 [ext_resource type="Shader" uid="uid://cvxxqj4pj5s5e" path="res://scripts/shaders/sky.gdshader" id="7_kek77"]
 [ext_resource type="Script" uid="uid://cixtt760l26dn" path="res://scenes/Player/interaction_system.gd" id="9_kek77"]
-[ext_resource type="Resource" uid="uid://gatsbse3jkwk" path="res://resources/guide/look_absolute.tres" id="14_vivmo"]
 [ext_resource type="PackedScene" uid="uid://dkr80d2pi0d41" path="res://addons/guide/debugger/guide_debugger.tscn" id="14_w48qg"]
-[ext_resource type="Script" uid="uid://c7b7wwdc8kkrl" path="res://scenes/grid/plant_grid_system.gd" id="15_vivmo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4c57u"]
 shader = ExtResource("7_kek77")
@@ -37,7 +35,7 @@ volumetric_fog_enabled = true
 volumetric_fog_density = 0.02
 volumetric_fog_sky_affect = 0.091
 
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_w48qg"]
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ycdy4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lquwl"]
 height = 1.2565918
@@ -243,13 +241,6 @@ animations = [{
 [sub_resource type="Resource" id="Resource_kek77"]
 script = ExtResource("6_5vw27")
 
-[sub_resource type="QuadMesh" id="QuadMesh_vivmo"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vivmo"]
-transparency = 1
-albedo_color = Color(5.912981, 5.912981, 5.912981, 0.001)
-grow_amount = 0.615
-
 [sub_resource type="GDScript" id="GDScript_5vw27"]
 script/source = "extends HBoxContainer
 
@@ -331,7 +322,7 @@ data = {
 [node name="StaticBody3D" type="StaticBody3D" parent="World/GridMap"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/GridMap/StaticBody3D"]
-shape = SubResource("WorldBoundaryShape3D_w48qg")
+shape = SubResource("WorldBoundaryShape3D_ycdy4")
 
 [node name="Player" type="CharacterBody3D" parent="World" node_paths=PackedStringArray("sprite")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.041113257, 0)
@@ -373,13 +364,7 @@ tween_resource = SubResource("Resource_kek77")
 follow_offset = Vector3(0, 5.835, 2.705)
 metadata/_custom_type_script = "uid://csjccrhj5wnx7"
 
-[node name="SelectionHighlight" type="MeshInstance3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.602, 0.001, 0)
-mesh = SubResource("QuadMesh_vivmo")
-surface_material_override/0 = SubResource("StandardMaterial3D_vivmo")
-
 [node name="HUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("inventory_menu")]
-visible = false
 script = ExtResource("5_kek77")
 inventory_menu = NodePath("ShopPanelContainer")
 
@@ -399,18 +384,10 @@ unique_name_in_owner = true
 visible = false
 
 [node name="Debug Layer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="GuideDebugger" parent="Debug Layer" instance=ExtResource("14_w48qg")]
 
 [node name="Systems" type="Node" parent="."]
 
-[node name="PlantGridSystem" type="Node" parent="Systems" node_paths=PackedStringArray("grid_map")]
-script = ExtResource("15_vivmo")
-grid_map = NodePath("../../World/GridMap")
-
-[node name="InteractionSystem" type="Node" parent="Systems" node_paths=PackedStringArray("player", "selection_highlight")]
+[node name="InteractionSystem" type="Node" parent="Systems"]
 script = ExtResource("9_kek77")
-look_absolute = ExtResource("14_vivmo")
-player = NodePath("../../World/Player")
-selection_highlight = NodePath("../../World/SelectionHighlight")

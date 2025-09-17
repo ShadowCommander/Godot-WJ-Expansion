@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://dbqvf4v1f1djf"]
+[gd_scene load_steps=53 format=3 uid="uid://dbqvf4v1f1djf"]
 
 [ext_resource type="MeshLibrary" uid="uid://cy0jkyme5e54e" path="res://scenes/grid/mesh_library.tres" id="1_5vw27"]
 [ext_resource type="Script" uid="uid://n2b6xu6p3fsc" path="res://world.gd" id="1_dg77c"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dkr80d2pi0d41" path="res://addons/guide/debugger/guide_debugger.tscn" id="14_w48qg"]
 [ext_resource type="Script" uid="uid://c7b7wwdc8kkrl" path="res://scenes/grid/plant_grid_system.gd" id="15_vivmo"]
 [ext_resource type="Resource" uid="uid://c6173jayb8uuj" path="res://resources/guide/interact.tres" id="16_2cqfq"]
+[ext_resource type="Script" uid="uid://jd2fisfw4t1g" path="res://moss_spread_system.gd" id="17_yaehf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4c57u"]
 shader = ExtResource("7_kek77")
@@ -420,3 +421,7 @@ look_absolute = ExtResource("14_vivmo")
 interact = ExtResource("16_2cqfq")
 player = NodePath("../../World/Player")
 selection_highlight = NodePath("../../World/SelectionHighlight")
+
+[node name="MossSpreadSystem" type="Node" parent="Systems" node_paths=PackedStringArray("grid")]
+script = ExtResource("17_yaehf")
+grid = NodePath("../../World/GridMap")

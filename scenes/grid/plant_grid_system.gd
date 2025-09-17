@@ -39,7 +39,7 @@ func get_cell_center(cell: Vector3i) -> Vector3:
 
 #region Interaction
 
-const PLANT = preload("uid://dufdya5b5ivea")
+const PLANT = preload("uid://dufdya5b5ivea") # TODO Replace with hotbar and seeds from inventory
 
 func plant(plant_resource: PlantResource, cell: Vector3i) -> void:
 	if not can_plant(cell):
@@ -49,6 +49,6 @@ func plant(plant_resource: PlantResource, cell: Vector3i) -> void:
 	plant.plant_resource = plant_resource
 	plant_grid[cell] = plant
 	plant_container.add_child(plant)
-	plant.position = get_cell_center(cell)
+	plant.global_position = get_cell_center(cell)
 
 #endregion

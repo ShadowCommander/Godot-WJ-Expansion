@@ -33,8 +33,8 @@ func highlight_hovered_tile(pos: Vector3) -> void:
 	# Get grid square and position cursor highlight
 	highlighted_cell = plant_grid_system.get_cell(pos)
 	
-	var hightlight_pos = plant_grid_system.get_cell_center(highlighted_cell)
-	selection_highlight.global_position = hightlight_pos
+	var highlighted_pos: Vector3 = plant_grid_system.get_cell_center(highlighted_cell)
+	selection_highlight.global_position = highlighted_pos
 	#selection_highlight.reset_physics_interpolation() # Prevents slidey physics interpolation when positioning the highlight
 	
 	# TODO Highlight the plant on the tile

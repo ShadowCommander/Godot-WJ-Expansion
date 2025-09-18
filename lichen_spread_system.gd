@@ -3,6 +3,7 @@ extends Node
 const CELL_ID = 2
 
 @export var grid: GridMap
+@export var ground_grid: GridMap
 
 # Seconds per tile spread
 @export var spread_delay = 1.0
@@ -24,16 +25,18 @@ func append_all_tiles_to_spread_to() -> void:
 		append_adjacent_tiles_to_spread_to(cell)
 	tiles_to_spread_to.shuffle()
 
+var cells_to_check = [
+	Vector3i(1, 0, 0),
+	Vector3i(-1, 0, 0),
+	Vector3i(0, 0, 1),
+	Vector3i(0, 0, -1),
+]
+
 func append_adjacent_tiles_to_spread_to(cell: Vector3i) -> void:
 	var cells: Array[Vector3i] = []
-	if grid.get_cell_item(cell + Vector3i(1, 0, 0)) != CELL_ID:
-		cells.append(cell + Vector3i(1, 0, 0))
-	if grid.get_cell_item(cell + Vector3i(-1, 0, 0)) != CELL_ID:
-		cells.append(cell + Vector3i(-1, 0, 0))
-	if grid.get_cell_item(cell + Vector3i(0, 0, 1)) != CELL_ID:
-		cells.append(cell + Vector3i(0, 0, 1))
-	if grid.get_cell_item(cell + Vector3i(0, 0, -1)) != CELL_ID:
-		cells.append(cell + Vector3i(0, 0, -1))
+	for adjacent in cells_to_check:
+		if grid.get_cell_item(cell + adjacent) != CELL_ID and ground_grid.get_cell_item(cell + adjacent) != GridMap.INVALID_CELL_ITEM:
+			cells.append(cell + adjacent)
 	for c in cells:
 		#if grid.get_cell_item(c) == CELL_ID:
 			#print("ERROR: ", c)
@@ -50,6 +53,5 @@ func spread() -> void:
 	var cell = tiles_to_spread_to.pop_front()
 	if cell == null:
 		return
-	print(grid.get_cell_item(cell))
 	grid.set_cell_item(cell, CELL_ID)
 	append_adjacent_tiles_to_spread_to(cell)

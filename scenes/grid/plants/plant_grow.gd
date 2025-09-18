@@ -29,7 +29,7 @@ func set_growth_frame() -> void:
 	var frame_count = sprite_frames.get_frame_count("default")
 	var lerped = lerp(0, frame_count - 1, value)
 	var life_stage = ceil(lerped)
-	print("weight: %0.2f, lerp: %0.2f, life stage: %d" % [value, lerped, life_stage])
+	#print("weight: %0.2f, lerp: %0.2f, life stage: %d" % [value, lerped, life_stage])
 	if life_stage == 0:
 		harvestable = true
 	frame = life_stage

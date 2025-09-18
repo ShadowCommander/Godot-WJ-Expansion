@@ -19,8 +19,8 @@ func _physics_process(delta: float) -> void:
 
 
 func append_all_tiles_to_spread_to() -> void:
-	var cells_with_moss = grid.get_used_cells_by_item(CELL_ID)
-	for cell in cells_with_moss:
+	var cells_with_lichen = grid.get_used_cells_by_item(CELL_ID)
+	for cell in cells_with_lichen:
 		append_adjacent_tiles_to_spread_to(cell)
 	tiles_to_spread_to.shuffle()
 

@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bt23cg4w6vubn" path="res://scenes/grid/tiles/grass_mesh.tscn" id="1_go2t5"]
 [ext_resource type="PackedScene" uid="uid://kxklgdef4b0k" path="res://scenes/grid/tiles/wood_mesh.tscn" id="2_oild2"]
 [ext_resource type="Texture2D" uid="uid://ca6ldtb3w668s" path="res://assets/textures/sprites/tiles/tile_0001.png" id="2_sur7u"]
-[ext_resource type="PackedScene" uid="uid://cef3jekgb8jqf" path="res://scenes/grid/tiles/moss_mesh.tscn" id="4_sur7u"]
+[ext_resource type="PackedScene" uid="uid://cef3jekgb8jqf" path="res://scenes/grid/tiles/lichen_mesh.tscn" id="4_sur7u"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_p3451"]
 

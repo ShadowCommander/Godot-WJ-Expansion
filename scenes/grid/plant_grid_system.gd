@@ -1,7 +1,7 @@
 extends Node
 class_name PlantGridSystem
 
-const MOSS_INDEX: int = 2
+const LICHEN_INDEX: int = 2
 
 var plant_grid: Dictionary[Vector3i, Plant]
 
@@ -9,8 +9,8 @@ var plant_grid: Dictionary[Vector3i, Plant]
 @export var plant_container: Node3D
 
 func can_plant(cell: Vector3i) -> bool:
-	# Check if pos is moss on GridMap
-	if grid_map.get_cell_item(cell) != MOSS_INDEX:
+	# Check if pos is lichen on GridMap
+	if grid_map.get_cell_item(cell) != LICHEN_INDEX:
 		return false
 	
 	# Check if pos has no plant

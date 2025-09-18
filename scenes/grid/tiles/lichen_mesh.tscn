@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://cef3jekgb8jqf"]
+
+[ext_resource type="Texture2D" uid="uid://siooi4dak8mx" path="res://assets/textures/sprites/tiles/purple_floor.png" id="1_hfdo3"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_d86d2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u1ndv"]
+albedo_texture = ExtResource("1_hfdo3")
+texture_filter = 0
+
+[node name="LichenTileMesh" type="MeshInstance3D"]
+mesh = SubResource("QuadMesh_d86d2")
+surface_material_override/0 = SubResource("StandardMaterial3D_u1ndv")

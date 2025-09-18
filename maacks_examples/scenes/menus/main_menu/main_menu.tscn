@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://bhxxylotaxx2l"]
+
+[ext_resource type="PackedScene" uid="uid://c6k5nnpbypshi" path="res://addons/maaacks_game_template/base/scenes/menus/main_menu/main_menu.tscn" id="1_nxfgr"]
+[ext_resource type="Script" uid="uid://dt3yfmoy8o1h3" path="res://maacks_examples/scenes/menus/main_menu/main_menu.gd" id="2_473ur"]
+[ext_resource type="PackedScene" uid="uid://ebw14birsuli" path="res://maacks_examples/scenes/menus/options_menu/mini_options_menu.tscn" id="3_uwo1s"]
+[ext_resource type="PackedScene" uid="uid://dfyhn30530g4f" path="res://maacks_examples/scenes/credits/scrollable_credits.tscn" id="4_t2uv2"]
+[ext_resource type="AudioStream" uid="uid://jre7wpig6h0c" path="res://assets/sounds/menu_button_sound.wav" id="5_473ur"]
+[ext_resource type="Texture2D" uid="uid://dwa8h4xwago37" path="res://assets/textures/ui/cover_image_grow.png" id="6_uwo1s"]
+
+[node name="MainMenu" instance=ExtResource("1_nxfgr")]
+script = ExtResource("2_473ur")
+level_select_packed_scene = null
+confirm_new_game = true
+game_scene_path = "uid://dbqvf4v1f1djf"
+options_packed_scene = ExtResource("3_uwo1s")
+credits_packed_scene = ExtResource("4_t2uv2")
+
+[node name="BackgroundMusicPlayer" parent="." index="1"]
+stream = ExtResource("5_473ur")
+
+[node name="BackgroundTextureRect" parent="." index="2"]
+texture = ExtResource("6_uwo1s")
+
+[node name="TitleLabel" parent="MenuContainer/TitleMargin/TitleContainer" index="0"]
+text = "Expansion"
+
+[node name="SubTitleLabel" parent="MenuContainer/SubTitleMargin/SubTitleContainer" index="0"]
+text = "A game about growing plants on an alien planet"
+
+[node name="ContinueGameButton" type="Button" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer" index="1"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Continue"
+
+[node name="LevelSelectButton" type="Button" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer" index="2"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Level Select"
+
+[node name="LevelSelectContainer" type="MarginContainer" parent="." index="7"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 32
+
+[node name="NewGameConfirmationDialog" type="ConfirmationDialog" parent="." index="9"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+title = "Start a New Game?"
+size = Vector2i(480, 158)
+dialog_text = "Are you sure you want to start a new game?
+
+All progress in the current game will be lost."
+
+[connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/ContinueGameButton" to="." method="_on_continue_game_button_pressed"]
+[connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer/LevelSelectButton" to="." method="_on_level_select_button_pressed"]
+[connection signal="confirmed" from="NewGameConfirmationDialog" to="." method="_on_new_game_confirmation_dialog_confirmed"]

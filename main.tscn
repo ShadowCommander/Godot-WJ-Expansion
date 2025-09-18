@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://dbqvf4v1f1djf"]
+[gd_scene load_steps=54 format=3 uid="uid://dbqvf4v1f1djf"]
 
 [ext_resource type="MeshLibrary" uid="uid://cy0jkyme5e54e" path="res://scenes/grid/mesh_library.tres" id="1_5vw27"]
 [ext_resource type="Script" uid="uid://n2b6xu6p3fsc" path="res://world.gd" id="1_dg77c"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://c7b7wwdc8kkrl" path="res://scenes/grid/plant_grid_system.gd" id="15_vivmo"]
 [ext_resource type="Resource" uid="uid://c6173jayb8uuj" path="res://resources/guide/interact.tres" id="16_2cqfq"]
 [ext_resource type="Script" uid="uid://jd2fisfw4t1g" path="res://lichen_spread_system.gd" id="17_yaehf"]
+[ext_resource type="Script" uid="uid://blliw7psk0h0r" path="res://random_plant_growth_system.gd" id="18_074og"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4c57u"]
 shader = ExtResource("7_kek77")
@@ -434,6 +435,10 @@ player = NodePath("../../World/Player")
 selection_highlight = NodePath("../../World/SelectionHighlight")
 
 [node name="LichenSpreadSystem" type="Node" parent="Systems" node_paths=PackedStringArray("grid", "ground_grid")]
+unique_name_in_owner = true
 script = ExtResource("17_yaehf")
 grid = NodePath("../../World/LichenGridMap")
 ground_grid = NodePath("../../World/GroundGridMap")
+
+[node name="RandomPlantGrowthSystem" type="Node" parent="Systems"]
+script = ExtResource("18_074og")

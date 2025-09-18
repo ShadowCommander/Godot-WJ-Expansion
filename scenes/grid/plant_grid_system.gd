@@ -8,6 +8,8 @@ var plant_grid: Dictionary[Vector3i, Plant]
 @export var grid_map: GridMap
 @export var plant_container: Node3D
 
+#region Plant
+
 func can_plant(cell: Vector3i) -> bool:
 	# Check if pos is lichen on GridMap
 	if grid_map.get_cell_item(cell) != LICHEN_INDEX:
@@ -18,6 +20,11 @@ func can_plant(cell: Vector3i) -> bool:
 		return false
 	
 	return true
+
+func get_plant(cell: Vector3i) -> Plant:
+	return plant_grid.get(cell)
+
+#endregion
 
 #region Get cell
 
@@ -41,6 +48,8 @@ func get_cell_center(cell: Vector3i) -> Vector3:
 
 const PLANT = preload("uid://dufdya5b5ivea") # TODO Replace with hotbar and seeds from inventory
 
+@onready var planting_pos_rand = half_cell_size * 0.5
+
 func plant(plant_resource: PlantResource, cell: Vector3i) -> void:
 	if not can_plant(cell):
 		return
@@ -49,6 +58,7 @@ func plant(plant_resource: PlantResource, cell: Vector3i) -> void:
 	plant.plant_resource = plant_resource
 	plant_grid[cell] = plant
 	plant_container.add_child(plant)
-	plant.global_position = get_cell_center(cell)
+	var planting_pos = get_cell_center(cell) + Vector3(randf_range(-planting_pos_rand.x, planting_pos_rand.x), 0, randf_range(-planting_pos_rand.z, planting_pos_rand.z))
+	plant.global_position = planting_pos
 
 #endregion

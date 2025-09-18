@@ -20,7 +20,6 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	
 	if not is_node_ready():
 		return
 	var target: Vector3 = look_absolute.value_axis_3d
@@ -28,13 +27,20 @@ func _process(delta: float) -> void:
 		target = look_absolute.value_axis_3d
 	target.y = 0
 	
-	
+	highlight_hovered_tile(target)
+
+func highlight_hovered_tile(pos: Vector3) -> void:
 	# Get grid square and position cursor highlight
-	highlighted_cell = plant_grid_system.get_cell(target)
-	var grid_selection: AABB = plant_grid_system.get_cell_aabb(highlighted_cell)
-	var pos = Vector3(grid_selection.position.x + (grid_selection.size.x / 2), 0.0001, grid_selection.position.z + (grid_selection.size.z / 2))
-	selection_highlight.global_position = pos
-	#selection_highlight.reset_physics_interpolation()
+	highlighted_cell = plant_grid_system.get_cell(pos)
+	
+	var hightlight_pos = plant_grid_system.get_cell_center(highlighted_cell)
+	selection_highlight.global_position = hightlight_pos
+	#selection_highlight.reset_physics_interpolation() # Prevents slidey physics interpolation when positioning the highlight
+	
+	# TODO Highlight the plant on the tile
+	#var plant = plant_grid_system.get_plant(highlighted_cell)
+	#if plant != null:
+		#pass
 
 func get_tile_toward_mouse() -> Vector2i:
 	return Vector2i.ZERO

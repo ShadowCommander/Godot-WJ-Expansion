@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GUIDEMappingContext" load_steps=45 format=3 uid="uid://cw7yf0noamm8s"]
+[gd_resource type="Resource" script_class="GUIDEMappingContext" load_steps=51 format=3 uid="uid://cw7yf0noamm8s"]
 
 [ext_resource type="Script" uid="uid://cpplm41b5bt6m" path="res://addons/guide/guide_action_mapping.gd" id="1_7plqc"]
 [ext_resource type="Script" uid="uid://dsa1dnifd6w32" path="res://addons/guide/guide_mapping_context.gd" id="2_2s7b0"]
@@ -17,6 +17,8 @@
 [ext_resource type="Script" uid="uid://deeru16npi81q" path="res://addons/guide/inputs/guide_input_mouse_position.gd" id="14_23d5w"]
 [ext_resource type="Script" uid="uid://cw8qjwdktercg" path="res://addons/guide/modifiers/guide_modifier_3d_coordinates.gd" id="15_vblxl"]
 [ext_resource type="Resource" uid="uid://cs4e7wytk7q8d" path="res://resources/guide/harvest.tres" id="16_na7sv"]
+[ext_resource type="Resource" uid="uid://cy5fpgtv4j7un" path="res://resources/guide/toggle_shop.tres" id="17_7632g"]
+[ext_resource type="Script" uid="uid://b52rqq28tuqpg" path="res://addons/guide/triggers/guide_trigger_pressed.gd" id="18_23d5w"]
 
 [sub_resource type="Resource" id="Resource_vblxl"]
 script = ExtResource("4_s8wi1")
@@ -136,7 +138,25 @@ script = ExtResource("1_7plqc")
 action = ExtResource("16_na7sv")
 input_mappings = Array[ExtResource("3_hk65h")]([SubResource("Resource_3nhs0")])
 
+[sub_resource type="Resource" id="Resource_ujah5"]
+script = ExtResource("4_s8wi1")
+key = 69
+
+[sub_resource type="Resource" id="Resource_wo6ak"]
+script = ExtResource("18_23d5w")
+metadata/_custom_type_script = "uid://b52rqq28tuqpg"
+
+[sub_resource type="Resource" id="Resource_sxr3i"]
+script = ExtResource("3_hk65h")
+input = SubResource("Resource_ujah5")
+triggers = Array[ExtResource("8_ytitt")]([SubResource("Resource_wo6ak")])
+
+[sub_resource type="Resource" id="Resource_nrxuo"]
+script = ExtResource("1_7plqc")
+action = ExtResource("17_7632g")
+input_mappings = Array[ExtResource("3_hk65h")]([SubResource("Resource_sxr3i")])
+
 [resource]
 script = ExtResource("2_2s7b0")
-mappings = Array[ExtResource("1_7plqc")]([SubResource("Resource_ctac5"), SubResource("Resource_auf67"), SubResource("Resource_g44x4"), SubResource("Resource_ukyxt")])
+mappings = Array[ExtResource("1_7plqc")]([SubResource("Resource_ctac5"), SubResource("Resource_auf67"), SubResource("Resource_g44x4"), SubResource("Resource_ukyxt"), SubResource("Resource_nrxuo")])
 metadata/_custom_type_script = "uid://dsa1dnifd6w32"

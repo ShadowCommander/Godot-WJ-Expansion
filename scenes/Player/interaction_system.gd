@@ -66,6 +66,9 @@ func on_harvest() -> void:
 	var plant = plant_grid_system.harvest(highlighted_cell)
 	if plant == null:
 		return
+	for produce_resource: ProduceResource in plant.plant_resource.produce:
+		var amount = plant.plant_resource.produce[produce_resource]
+		%ShopPanelContainer.add_item(produce_resource.id, amount)
 	plant.queue_free()
 	
 #endregion

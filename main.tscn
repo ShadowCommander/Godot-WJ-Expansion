@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://dbqvf4v1f1djf"]
+[gd_scene load_steps=56 format=3 uid="uid://dbqvf4v1f1djf"]
 
 [ext_resource type="MeshLibrary" uid="uid://cy0jkyme5e54e" path="res://scenes/grid/mesh_library.tres" id="1_5vw27"]
 [ext_resource type="Script" uid="uid://n2b6xu6p3fsc" path="res://world.gd" id="1_dg77c"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bius36l10e1e1" path="res://scenes/UI/shop/simple_shop.tscn" id="7_4c57u"]
 [ext_resource type="Shader" uid="uid://cvxxqj4pj5s5e" path="res://scripts/shaders/sky.gdshader" id="7_kek77"]
 [ext_resource type="Script" uid="uid://cixtt760l26dn" path="res://scenes/Player/interaction_system.gd" id="9_kek77"]
+[ext_resource type="Resource" uid="uid://cy5fpgtv4j7un" path="res://resources/guide/toggle_shop.tres" id="11_82xsv"]
 [ext_resource type="Resource" uid="uid://gatsbse3jkwk" path="res://resources/guide/look_absolute.tres" id="14_vivmo"]
 [ext_resource type="PackedScene" uid="uid://dkr80d2pi0d41" path="res://addons/guide/debugger/guide_debugger.tscn" id="14_w48qg"]
 [ext_resource type="Script" uid="uid://c7b7wwdc8kkrl" path="res://scenes/grid/plant_grid_system.gd" id="15_vivmo"]
@@ -395,10 +396,10 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.60
 mesh = SubResource("QuadMesh_vivmo")
 surface_material_override/0 = SubResource("StandardMaterial3D_vivmo")
 
-[node name="HUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("inventory_menu")]
-visible = false
+[node name="HUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("shop_menu")]
 script = ExtResource("5_kek77")
-inventory_menu = NodePath("ShopPanelContainer")
+shop_menu = NodePath("ShopPanelContainer")
+toggle_shop = ExtResource("11_82xsv")
 
 [node name="HotbarContainer" type="HBoxContainer" parent="HUD"]
 anchors_preset = 15

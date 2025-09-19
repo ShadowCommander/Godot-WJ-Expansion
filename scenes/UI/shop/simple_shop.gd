@@ -198,4 +198,31 @@ func __refresh_inventory_list() -> void:
 
 
 func _on_exit_pressed() -> void:
-	get_parent().visible = false
+	visible = false
+
+func add_item(item_id: int, amount: int = 1) -> bool:
+	var excess: ExcessItems = inventory_manager.add(item_id, amount)
+	if excess == null:
+		return true
+	return excess.get_item_count() == 0
+
+func remove_item(item_id: int, amount: int = 1) -> bool:
+	if not inventory_manager.has_item_amount(item_id, amount):
+		return false
+	inventory_manager.remove(item_id, amount)
+	return true
+
+func has_item(item_id: int, amount: int = 1) -> bool:
+	return inventory_manager.has_item_amount(item_id, amount)
+
+func get_item_count(item_id: int) -> int:
+	return inventory_manager.get_item_total(item_id)
+
+func get_gold() -> int:
+	return get_item_count(item_ids.GOLD_COIN)
+
+func add_gold(amount: int) -> bool:
+	return add_item(item_ids.GOLD_COIN, amount)
+
+func remove_gold(amount: int) -> bool:
+	return remove_item(item_ids.GOLD_COIN, amount)

@@ -1,10 +1,10 @@
 extends CanvasLayer
 
-@export var inventory_menu: PanelContainer
+@export var shop_menu: PanelContainer
+@export var toggle_shop: GUIDEAction
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("inventory"):
-		toggle_inventory()
+func _ready() -> void:
+	toggle_shop.triggered.connect(on_toggle_shop)
 
-func toggle_inventory() -> void:
-	inventory_menu.visible = !inventory_menu.visible
+func on_toggle_shop() -> void:
+	shop_menu.visible = !shop_menu.visible

@@ -1,12 +1,16 @@
-[gd_resource type="Resource" script_class="PlantResource" load_steps=4 format=3 uid="uid://b6xi6g65y2i8j"]
+[gd_resource type="Resource" script_class="PlantResource" load_steps=5 format=3 uid="uid://b6xi6g65y2i8j"]
 
-[ext_resource type="Script" uid="uid://ceep12fx8vbxm" path="res://resources/produce_resource.gd" id="1_pgfmi"]
-[ext_resource type="Script" uid="uid://fhdywgjfqixc" path="res://resources/plant_resource.gd" id="2_y6dhg"]
-[ext_resource type="SpriteFrames" uid="uid://cmsh0sloyy3mv" path="res://resources/data/zen_plant_sprite_frames.tres" id="3_y6dhg"]
+[ext_resource type="Script" uid="uid://ceep12fx8vbxm" path="res://resources/produce_resource.gd" id="1_a5kid"]
+[ext_resource type="Script" uid="uid://fhdywgjfqixc" path="res://resources/plant_resource.gd" id="2_osolj"]
+[ext_resource type="Resource" uid="uid://bo4jt4y2dngv4" path="res://resources/data/zen_fruit.tres" id="2_t46ab"]
+[ext_resource type="SpriteFrames" uid="uid://cmsh0sloyy3mv" path="res://resources/data/zen_plant_sprite_frames.tres" id="3_t46ab"]
 
 [resource]
-script = ExtResource("2_y6dhg")
+script = ExtResource("2_osolj")
 display_name = "Zen"
 maturation_time = 10.0
-sprite_frames = ExtResource("3_y6dhg")
+sprite_frames = ExtResource("3_t46ab")
+produce = Dictionary[ExtResource("1_a5kid"), int]({
+ExtResource("2_t46ab"): 3
+})
 metadata/_custom_type_script = "uid://fhdywgjfqixc"

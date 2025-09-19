@@ -63,12 +63,9 @@ func on_interact() -> void:
 	plant_grid_system.plant(ZEN_PLANT, highlighted_cell)
 
 func on_harvest() -> void:
-	var plant = plant_grid_system.harvest(highlighted_cell)
-	if plant == null:
-		return
-	for produce_resource: ProduceResource in plant.plant_resource.produce:
-		var amount = plant.plant_resource.produce[produce_resource]
+	var produce_list = plant_grid_system.harvest(highlighted_cell)
+	for produce_resource: ProduceResource in produce_list:
+		var amount = produce_list[produce_resource]
 		%ShopPanelContainer.add_item(produce_resource.id, amount)
-	plant.queue_free()
 	
 #endregion

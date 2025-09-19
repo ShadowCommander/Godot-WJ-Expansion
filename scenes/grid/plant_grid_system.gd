@@ -9,6 +9,8 @@ var plant_grid: Dictionary[Vector3i, Plant]
 @export var ground_grid: GridMap
 @export var plant_container: Node3D
 
+var search_max_loops: int = 1000
+
 #region Plant
 
 func can_plant(cell: Vector3i) -> bool:
@@ -24,6 +26,18 @@ func can_plant(cell: Vector3i) -> bool:
 
 func get_plant(cell: Vector3i) -> Plant:
 	return plant_grid.get(cell)
+
+func get_plantable_cell() -> Vector3i:
+	var cells = lichen_grid.get_used_cells_by_item(LICHEN_INDEX)
+	var i = 0
+	var cell = cells.pick_random()
+	while plant_grid.has(cell):
+		cell = cells.pick_random()
+		i += 1
+		if i > search_max_loops:
+			break
+	return cell
+
 
 #endregion
 
@@ -51,9 +65,11 @@ const PLANT = preload("uid://dufdya5b5ivea") # TODO Replace with hotbar and seed
 
 @onready var planting_pos_rand = half_cell_size * 0.5
 
-func plant(plant_resource: PlantResource, cell: Vector3i) -> void:
+## Creates a plant with plant_resource on the provided cell.[br]
+## Returns whether a plant was spawned.
+func plant(plant_resource: PlantResource, cell: Vector3i) -> bool:
 	if not can_plant(cell):
-		return
+		return false
 	print(plant_resource, cell)
 	var plant: Plant = PLANT.instantiate()
 	plant.plant_resource = plant_resource
@@ -61,5 +77,6 @@ func plant(plant_resource: PlantResource, cell: Vector3i) -> void:
 	plant_container.add_child(plant)
 	var planting_pos = get_cell_center(cell) + Vector3(randf_range(-planting_pos_rand.x, planting_pos_rand.x), 0, randf_range(-planting_pos_rand.z, planting_pos_rand.z))
 	plant.global_position = planting_pos
+	return true
 
 #endregion

@@ -27,5 +27,5 @@ func tick_planting(delta: float) -> void:
 	
 	if plants.size() <= 0:
 		return
-	var cell = Vector3(randi_range(-10, 10), 0, randi_range(-10, 10))
+	var cell = plant_grid_system.get_plantable_cell()
 	plant_grid_system.plant(plants[0], cell)

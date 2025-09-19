@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://dbqvf4v1f1djf"]
+[gd_scene load_steps=55 format=3 uid="uid://dbqvf4v1f1djf"]
 
 [ext_resource type="MeshLibrary" uid="uid://cy0jkyme5e54e" path="res://scenes/grid/mesh_library.tres" id="1_5vw27"]
 [ext_resource type="Script" uid="uid://n2b6xu6p3fsc" path="res://world.gd" id="1_dg77c"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dkr80d2pi0d41" path="res://addons/guide/debugger/guide_debugger.tscn" id="14_w48qg"]
 [ext_resource type="Script" uid="uid://c7b7wwdc8kkrl" path="res://scenes/grid/plant_grid_system.gd" id="15_vivmo"]
 [ext_resource type="Resource" uid="uid://c6173jayb8uuj" path="res://resources/guide/interact.tres" id="16_2cqfq"]
+[ext_resource type="Resource" uid="uid://cs4e7wytk7q8d" path="res://resources/guide/harvest.tres" id="17_cegan"]
 [ext_resource type="Script" uid="uid://jd2fisfw4t1g" path="res://lichen_spread_system.gd" id="17_yaehf"]
 [ext_resource type="Script" uid="uid://blliw7psk0h0r" path="res://random_plant_growth_system.gd" id="18_074og"]
 
@@ -431,6 +432,7 @@ plant_container = NodePath("../../World/PlantContainer")
 script = ExtResource("9_kek77")
 look_absolute = ExtResource("14_vivmo")
 interact = ExtResource("16_2cqfq")
+harvest = ExtResource("17_cegan")
 player = NodePath("../../World/Player")
 selection_highlight = NodePath("../../World/SelectionHighlight")
 

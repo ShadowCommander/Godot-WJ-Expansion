@@ -5,6 +5,7 @@ extends Node
 @export var look_absolute: GUIDEAction
 @export var look_relative: GUIDEAction
 @export var interact: GUIDEAction
+@export var harvest: GUIDEAction
 
 @export var player: CharacterBody3D
 @export var selection_highlight: MeshInstance3D
@@ -17,6 +18,7 @@ var highlighted_cell: Vector3i = Vector3i.ZERO
 
 func _ready() -> void:
 	interact.triggered.connect(on_interact)
+	harvest.triggered.connect(on_harvest)
 
 
 func _process(delta: float) -> void:
@@ -60,4 +62,10 @@ const ZEN_PLANT = preload("uid://b6xi6g65y2i8j")
 func on_interact() -> void:
 	plant_grid_system.plant(ZEN_PLANT, highlighted_cell)
 
+func on_harvest() -> void:
+	var plant = plant_grid_system.harvest(highlighted_cell)
+	if plant == null:
+		return
+	plant.queue_free()
+	
 #endregion

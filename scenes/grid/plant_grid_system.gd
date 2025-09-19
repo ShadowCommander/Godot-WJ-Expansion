@@ -79,4 +79,11 @@ func plant(plant_resource: PlantResource, cell: Vector3i) -> bool:
 	plant.global_position = planting_pos
 	return true
 
+func harvest(cell: Vector3i) -> Plant:
+	if not plant_grid.has(cell):
+		return null
+	var plant = plant_grid.get(cell)
+	plant_grid.erase(cell)
+	return plant
+
 #endregion

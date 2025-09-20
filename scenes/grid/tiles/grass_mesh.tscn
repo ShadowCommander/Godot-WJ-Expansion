@@ -1,11 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://bt23cg4w6vubn"]
 
-[ext_resource type="Texture2D" uid="uid://ca6ldtb3w668s" path="res://assets/textures/sprites/tiles/tile_0001.png" id="1_o6cw0"]
+[ext_resource type="Texture2D" uid="uid://bcsgl1v3g8abi" path="res://assets/textures/sprites/tiles/grass_ground.png" id="1_831nb"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_831nb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t2608"]
-albedo_texture = ExtResource("1_o6cw0")
+albedo_texture = ExtResource("1_831nb")
 texture_filter = 0
 
 [node name="GrassTileMesh" type="MeshInstance3D"]

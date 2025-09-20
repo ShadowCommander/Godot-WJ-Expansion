@@ -11,8 +11,11 @@ var plants: Array = []
 
 func _ready() -> void:
 	time = Time.get_ticks_msec()
-	for plant in ResourceLoader.list_directory(resource_directory):
-		plants.append(ResourceLoader.load(resource_directory + "/" + plant))
+	var dir_contents: PackedStringArray = ResourceLoader.list_directory(resource_directory)
+	for file: String in dir_contents:
+		if file.ends_with("/"):
+			continue
+		plants.append(ResourceLoader.load(resource_directory + "/" + file))
 
 
 func _physics_process(delta: float) -> void:
@@ -27,5 +30,6 @@ func tick_planting(delta: float) -> void:
 	
 	if plants.size() <= 0:
 		return
+	var plant = plants.pick_random()
 	var cell = plant_grid_system.get_plantable_cell()
-	plant_grid_system.plant(plants[0], cell)
+	plant_grid_system.plant(plant, cell)

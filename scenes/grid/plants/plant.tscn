@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dufdya5b5ivea"]
 
-[ext_resource type="SpriteFrames" uid="uid://cmsh0sloyy3mv" path="res://resources/data/zen_plant_sprite_frames.tres" id="1_amb1i"]
+[ext_resource type="SpriteFrames" uid="uid://cmsh0sloyy3mv" path="res://resources/data/plants/sprite_frames/zen_plant_sprite_frames.tres" id="1_amb1i"]
 [ext_resource type="Script" uid="uid://cydth0ft0adqg" path="res://scenes/grid/plants/plant_grow.gd" id="1_iiemg"]
 
 [node name="Plant" type="AnimatedSprite3D"]

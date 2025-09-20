@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://ceep12fx8vbxm" path="res://resources/produce_resource.gd" id="1_a5kid"]
 [ext_resource type="Script" uid="uid://fhdywgjfqixc" path="res://resources/plant_resource.gd" id="2_osolj"]
-[ext_resource type="Resource" uid="uid://bo4jt4y2dngv4" path="res://resources/data/zen_fruit.tres" id="2_t46ab"]
-[ext_resource type="SpriteFrames" uid="uid://cmsh0sloyy3mv" path="res://resources/data/zen_plant_sprite_frames.tres" id="3_t46ab"]
+[ext_resource type="Resource" uid="uid://bo4jt4y2dngv4" path="res://resources/data/plants/produce/zen_fruit.tres" id="2_t46ab"]
+[ext_resource type="SpriteFrames" uid="uid://cmsh0sloyy3mv" path="res://resources/data/plants/sprite_frames/zen_plant_sprite_frames.tres" id="3_t46ab"]
 
 [resource]
 script = ExtResource("2_osolj")

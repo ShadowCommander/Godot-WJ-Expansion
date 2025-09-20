@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="PlantResource" load_steps=5 format=3 uid="uid://dt6vj0gnyh77c"]
+
+[ext_resource type="Script" uid="uid://ceep12fx8vbxm" path="res://resources/produce_resource.gd" id="1_tewh5"]
+[ext_resource type="Resource" uid="uid://ckfrv6bb3uqcf" path="res://resources/data/plants/produce/decay_fruit.tres" id="2_2bx6i"]
+[ext_resource type="Script" uid="uid://fhdywgjfqixc" path="res://resources/plant_resource.gd" id="2_12pnt"]
+[ext_resource type="SpriteFrames" uid="uid://tnbifilosrn6" path="res://resources/data/plants/sprite_frames/decay_plant_sprite_frames.tres" id="4_666ot"]
+
+[resource]
+script = ExtResource("2_12pnt")
+display_name = "Decay"
+maturation_time = 10.0
+sprite_frames = ExtResource("4_666ot")
+produce = Dictionary[ExtResource("1_tewh5"), int]({
+ExtResource("2_2bx6i"): 3
+})
+metadata/_custom_type_script = "uid://fhdywgjfqixc"

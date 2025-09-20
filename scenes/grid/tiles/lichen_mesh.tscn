@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cef3jekgb8jqf"]
 
-[ext_resource type="Texture2D" uid="uid://siooi4dak8mx" path="res://assets/textures/sprites/tiles/purple_floor.png" id="1_hfdo3"]
+[ext_resource type="Texture2D" uid="uid://cb6inj42wnsmo" path="res://assets/textures/sprites/tiles/leaves_ground2.png" id="1_hfdo3"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_d86d2"]
 

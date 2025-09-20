@@ -1,11 +1,11 @@
 [gd_resource type="MeshLibrary" load_steps=16 format=3 uid="uid://cy0jkyme5e54e"]
 
-[ext_resource type="Texture2D" uid="uid://ca6ldtb3w668s" path="res://assets/textures/sprites/tiles/tile_0001.png" id="1_ttoue"]
+[ext_resource type="Texture2D" uid="uid://bcsgl1v3g8abi" path="res://assets/textures/sprites/tiles/grass_ground.png" id="1_sfbwq"]
 [ext_resource type="Texture2D" uid="uid://dg6xea8t1tovq" path="res://assets/textures/sprites/tiles/tile_42.png" id="2_44vqp"]
-[ext_resource type="Texture2D" uid="uid://siooi4dak8mx" path="res://assets/textures/sprites/tiles/purple_floor.png" id="3_44vqp"]
+[ext_resource type="Texture2D" uid="uid://cb6inj42wnsmo" path="res://assets/textures/sprites/tiles/leaves_ground2.png" id="3_sfbwq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sfbwq"]
-albedo_texture = ExtResource("1_ttoue")
+albedo_texture = ExtResource("1_sfbwq")
 texture_filter = 0
 
 [sub_resource type="QuadMesh" id="QuadMesh_noqo6"]
@@ -43,7 +43,7 @@ data = {
 image = SubResource("Image_mmsx3")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ckfit"]
-albedo_texture = ExtResource("3_44vqp")
+albedo_texture = ExtResource("3_sfbwq")
 texture_filter = 0
 
 [sub_resource type="QuadMesh" id="QuadMesh_77kxh"]

@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://tnbifilosrn6"]
+
+[ext_resource type="Texture2D" uid="uid://cv86ap0p4v3cy" path="res://assets/textures/sprites/plants/Decay2.png" id="1_pkysy"]
+[ext_resource type="Texture2D" uid="uid://dbjrlwjvdhl5i" path="res://assets/textures/sprites/plants/Decay3.png" id="2_l3u38"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_l3u38")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_pkysy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

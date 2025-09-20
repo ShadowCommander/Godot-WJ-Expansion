@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ProduceResource" load_steps=3 format=3 uid="uid://ckfrv6bb3uqcf"]
+
+[ext_resource type="Script" uid="uid://ceep12fx8vbxm" path="res://resources/produce_resource.gd" id="1_5pghl"]
+[ext_resource type="Texture2D" uid="uid://c2wphsxbdkuvm" path="res://assets/textures/sprites/plants/DecayFruit.png" id="2_cems0"]
+
+[resource]
+script = ExtResource("1_5pghl")
+id = 3
+display_name = "Decay Fruit"
+texture = ExtResource("2_cems0")
+metadata/_custom_type_script = "uid://ceep12fx8vbxm"

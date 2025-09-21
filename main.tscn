@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://dbqvf4v1f1djf"]
+[gd_scene load_steps=57 format=3 uid="uid://dbqvf4v1f1djf"]
 
 [ext_resource type="MeshLibrary" uid="uid://cy0jkyme5e54e" path="res://scenes/grid/mesh_library.tres" id="1_5vw27"]
 [ext_resource type="Script" uid="uid://n2b6xu6p3fsc" path="res://world.gd" id="1_dg77c"]
@@ -20,6 +20,7 @@
 [ext_resource type="Resource" uid="uid://cs4e7wytk7q8d" path="res://resources/guide/harvest.tres" id="17_cegan"]
 [ext_resource type="Script" uid="uid://jd2fisfw4t1g" path="res://lichen_spread_system.gd" id="17_yaehf"]
 [ext_resource type="Script" uid="uid://blliw7psk0h0r" path="res://random_plant_growth_system.gd" id="18_074og"]
+[ext_resource type="AudioStream" uid="uid://b8lvldvwi3lge" path="res://resources/music/thinking while you collect plants.ogg" id="21_getpj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4c57u"]
 shader = ExtResource("7_kek77")
@@ -446,3 +447,9 @@ ground_grid = NodePath("../../World/GroundGridMap")
 
 [node name="RandomPlantGrowthSystem" type="Node" parent="Systems"]
 script = ExtResource("18_074og")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_getpj")
+volume_db = -7.018
+autoplay = true
+bus = &"Music"

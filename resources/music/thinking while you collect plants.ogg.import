@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b8lvldvwi3lge"
+path="res://.godot/imported/thinking while you collect plants.ogg-f9a48f02a8eb2516a19c5c374b48692c.oggvorbisstr"
+
+[deps]
+
+source_file="res://resources/music/thinking while you collect plants.ogg"
+dest_files=["res://.godot/imported/thinking while you collect plants.ogg-f9a48f02a8eb2516a19c5c374b48692c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

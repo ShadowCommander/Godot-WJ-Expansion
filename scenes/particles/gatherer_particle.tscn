@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cq7mhxujrq6y2"]
+
+[ext_resource type="Texture2D" uid="uid://c1jwy3f22i026" path="res://assets/textures/sprites/plants/ConstructFruit.png" id="1_jlf0s"]
+[ext_resource type="Script" uid="uid://0vadrhff8862" path="res://scenes/particles/gatherer_particle.gd" id="2_jlf0s"]
+
+[node name="GathererParticle" type="Sprite3D"]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+billboard = 1
+texture_filter = 0
+texture = ExtResource("1_jlf0s")
+script = ExtResource("2_jlf0s")

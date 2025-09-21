@@ -91,6 +91,12 @@ var spread_delay: Array[int] = [
 
 var stopped: bool = false
 
+func _ready() -> void:
+	entity.plant_matured.connect(on_plant_matured)
+
+func on_plant_matured() -> void:
+	entity.cells_affected.append_array(patterns[pattern_index])
+
 func advance_index() -> void:
 	if pattern_index >= patterns.size() - 1:
 		stopped = true
@@ -99,3 +105,5 @@ func advance_index() -> void:
 	if pattern_advance_time == -1:
 		pattern_advance_time = Time.get_ticks_msec()
 	pattern_advance_time += spread_delay[pattern_index]
+	entity.cells_affected.append_array(patterns[pattern_index])
+	entity.cells_updated.emit()

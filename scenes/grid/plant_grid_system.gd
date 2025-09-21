@@ -8,6 +8,7 @@ var plant_grid: Dictionary[Vector3i, Plant]
 @export var lichen_grid: GridMap
 @export var ground_grid: GridMap
 @export var plant_container: Node3D
+@export var lichen_system: LichenGridSystem
 
 var search_max_loops: int = 1000
 
@@ -73,10 +74,13 @@ func plant(plant_resource: PlantResource, cell: Vector3i) -> bool:
 	print(plant_resource, cell)
 	var plant: Plant = PLANT.instantiate()
 	plant.plant_resource = plant_resource
+	plant.cell = cell
 	plant_grid[cell] = plant
 	plant_container.add_child(plant)
 	var planting_pos = get_cell_center(cell) + Vector3(randf_range(-planting_pos_rand.x, planting_pos_rand.x), 0, randf_range(-planting_pos_rand.z, planting_pos_rand.z))
 	plant.global_position = planting_pos
+	plant.plant_matured.connect(on_plant_matured, CONNECT_APPEND_SOURCE_OBJECT)
+	plant.cells_updated.connect(on_plant_matured, CONNECT_APPEND_SOURCE_OBJECT)
 	
 	for c: PackedScene in plant.plant_resource.components:
 		var comp: Component = c.instantiate()
@@ -102,3 +106,9 @@ func harvest(cell: Vector3i) -> Dictionary[ProduceResource, int]:
 	return produce
 
 #endregion
+
+func on_plant_matured(plant: Plant) -> void:
+	lichen_system.add_plant_to_cells(plant, plant.plant_resource.cells_affected)
+	
+func on_cells_updated(plant: Plant) -> void:
+	lichen_system.add_plant_to_cells(plant, plant.plant_resource.cells_affected)

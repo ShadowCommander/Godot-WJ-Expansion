@@ -2,5 +2,5 @@
 extends Node
 class_name Component
 
-var entity: Node3D
+var entity: Plant
 var cell: Vector3i

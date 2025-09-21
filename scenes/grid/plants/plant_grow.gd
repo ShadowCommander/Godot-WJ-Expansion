@@ -1,6 +1,9 @@
 extends AnimatedSprite3D
 class_name Plant
 
+signal plant_matured
+signal cells_updated
+
 @export var plant_resource: PlantResource:
 	set(value):
 		plant_resource = value
@@ -10,11 +13,14 @@ class_name Plant
 var growth_timer: float
 var mature: bool = false
 
+var cell: Vector3i
+var cells_affected: Array[Vector3i]
 	
 func _ready() -> void:
 	growth_timer = plant_resource.maturation_time
 	set_growth_frame()
 	frame_changed.connect(on_frame_changed)
+	cells_affected = plant_resource.affected_tiles
 
 # Growth goes from max_life_stages to 0
 # Growth stages lerp from the seed, life stages, then fully mature at 0
@@ -33,6 +39,7 @@ func set_growth_frame() -> void:
 	#print("weight: %0.2f, lerp: %0.2f, life stage: %d" % [value, lerped, life_stage])
 	if life_stage == 0:
 		mature = true
+		plant_matured.emit()
 	frame = life_stage
 
 func on_frame_changed() -> void:

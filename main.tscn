@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://dbqvf4v1f1djf"]
+[gd_scene load_steps=59 format=3 uid="uid://dbqvf4v1f1djf"]
 
 [ext_resource type="MeshLibrary" uid="uid://cy0jkyme5e54e" path="res://scenes/grid/mesh_library.tres" id="1_5vw27"]
 [ext_resource type="Script" uid="uid://n2b6xu6p3fsc" path="res://world.gd" id="1_dg77c"]
@@ -21,6 +21,8 @@
 [ext_resource type="Script" uid="uid://jd2fisfw4t1g" path="res://lichen_spread_system.gd" id="17_yaehf"]
 [ext_resource type="Script" uid="uid://blliw7psk0h0r" path="res://random_plant_growth_system.gd" id="18_074og"]
 [ext_resource type="Script" uid="uid://4r62xopt74ae" path="res://scenes/grid/plants/lichen_spread_plant_system.gd" id="21_getpj"]
+[ext_resource type="Script" uid="uid://d0fotmmcgniky" path="res://lichen_grid_system.gd" id="22_ryguw"]
+[ext_resource type="Script" uid="uid://dlt1kwi427vfu" path="res://scripts/gatherer_system.gd" id="23_d13ii"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4c57u"]
 shader = ExtResource("7_kek77")
@@ -345,7 +347,7 @@ mesh_library = ExtResource("1_5vw27")
 cell_size = Vector3(1, 1, 1)
 cell_center_y = false
 data = {
-"cells": PackedInt32Array(65535, 65535, 2, 65535, 0, 2, 0, 65535, 2, 0, 0, 2, 1, 65535, 2, 65535, 65534, 2, 65534, 65534, 2, 65534, 65535, 2, 65534, 0, 2, 65535, 1, 2, 0, 1, 2, 1, 0, 2, 2, 0, 2, 0, 2, 2, 65535, 2, 2, 65534, 2, 2, 65533, 2, 2, 65533, 1, 2, 65533, 0, 2, 65535, 3, 2, 65534, 1, 2, 1, 1, 2, 1, 2, 2, 1, 3, 2, 0, 3, 2, 65534, 3, 2, 65533, 3, 2, 2, 1, 2, 3, 1, 2, 3, 2, 2, 2, 3, 2, 2, 4, 2, 1, 4, 2, 0, 4, 2, 65535, 4, 2, 65534, 4, 2, 2, 65535, 2, 2, 2, 2, 65533, 4, 2, 65532, 3, 2, 65531, 3, 2, 65531, 2, 2, 65531, 1, 2, 65531, 0, 2, 65532, 0, 2, 65532, 65535, 2, 65533, 65535, 2, 65533, 65534, 2, 0, 65534, 2, 1, 65534, 2, 3, 65535, 2, 3, 0, 2, 65532, 1, 2, 65532, 2, 2, 65532, 4, 2, 3, 3, 2, 3, 4, 2, 2, 5, 2, 1, 5, 2, 0, 5, 2, 65535, 5, 2, 65534, 5, 2, 65533, 5, 2)
+"cells": PackedInt32Array(65535, 65535, 2, 65535, 0, 2, 0, 65535, 2, 0, 0, 2, 1, 65535, 2, 65535, 65534, 2, 65534, 65534, 2, 65534, 65535, 2, 65534, 0, 2, 65535, 1, 2, 0, 1, 2, 1, 0, 2, 2, 0, 2, 0, 2, 2, 65535, 2, 2, 65534, 2, 2, 65533, 2, 2, 65533, 1, 2, 65533, 0, 2, 65535, 3, 2, 65534, 1, 2, 1, 1, 2, 1, 2, 2, 1, 3, 0, 0, 3, 2, 65534, 3, 0, 65533, 3, 0, 2, 1, 2, 3, 1, 0, 3, 2, 0, 2, 3, 0, 2, 4, 0, 1, 4, 0, 0, 4, 0, 65535, 4, 0, 2, 65535, 2, 2, 2, 2, 65533, 4, 0, 65532, 3, 0, 65531, 3, 0, 65531, 2, 0, 65531, 1, 0, 65531, 0, 2, 65532, 0, 2, 65532, 65535, 2, 65533, 65535, 2, 65533, 65534, 2, 0, 65534, 2, 1, 65534, 2, 3, 65535, 2, 3, 0, 2, 65532, 1, 0, 65532, 2, 0, 65532, 4, 0, 3, 3, 0, 3, 4, 0, 2, 5, 0, 1, 5, 0, 0, 5, 0, 65535, 5, 0, 65534, 5, 0, 65533, 5, 0, 65529, 1, 0, 65529, 2, 0, 65529, 3, 0, 65529, 4, 0, 65529, 5, 0, 65529, 6, 0, 65530, 1, 0, 65530, 2, 0, 65530, 3, 0, 65530, 4, 0, 65530, 5, 0, 65530, 6, 0, 65531, 4, 0, 65531, 5, 0, 65531, 6, 0, 65532, 5, 0, 65532, 6, 0, 65533, 6, 0, 65534, 4, 0, 65534, 6, 0, 65535, 6, 0, 0, 6, 0, 1, 6, 0, 2, 6, 0, 3, 5, 0, 3, 6, 0, 4, 1, 0, 4, 2, 0, 4, 3, 0, 4, 4, 0, 4, 5, 0, 4, 6, 0, 65533, 65533, 2, 65534, 65533, 2, 65535, 65533, 2, 0, 65533, 2, 1, 65533, 2, 2, 65533, 2, 2, 65534, 2, 65535, 65532, 2, 1, 65532, 2)
 }
 
 [node name="PlantContainer" type="Node3D" parent="World"]
@@ -425,11 +427,12 @@ visible = false
 
 [node name="Systems" type="Node" parent="."]
 
-[node name="PlantGridSystem" type="Node" parent="Systems" node_paths=PackedStringArray("lichen_grid", "ground_grid", "plant_container")]
+[node name="PlantGridSystem" type="Node" parent="Systems" node_paths=PackedStringArray("lichen_grid", "ground_grid", "plant_container", "lichen_system")]
 script = ExtResource("15_vivmo")
 lichen_grid = NodePath("../../World/LichenGridMap")
 ground_grid = NodePath("../../World/GroundGridMap")
 plant_container = NodePath("../../World/PlantContainer")
+lichen_system = NodePath("../LichenGridSystem")
 
 [node name="InteractionSystem" type="Node" parent="Systems" node_paths=PackedStringArray("player", "selection_highlight")]
 script = ExtResource("9_kek77")
@@ -450,5 +453,14 @@ script = ExtResource("18_074og")
 
 [node name="LichenSpreadPlantSystem" type="Node" parent="Systems" node_paths=PackedStringArray("lichen_grid", "particle_container")]
 script = ExtResource("21_getpj")
+lichen_grid = NodePath("../../World/LichenGridMap")
+particle_container = NodePath("../../World/ParticleContainer")
+
+[node name="LichenGridSystem" type="Node" parent="Systems"]
+script = ExtResource("22_ryguw")
+
+[node name="GathererSystem" type="Node" parent="Systems" node_paths=PackedStringArray("lichen_system", "lichen_grid", "particle_container")]
+script = ExtResource("23_d13ii")
+lichen_system = NodePath("../LichenGridSystem")
 lichen_grid = NodePath("../../World/LichenGridMap")
 particle_container = NodePath("../../World/ParticleContainer")

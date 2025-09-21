@@ -58,6 +58,7 @@ import/blender/enabled=false
 [global_group]
 
 LichenSpreaders=""
+LichenGatherers=""
 
 [gui]
 

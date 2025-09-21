@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="PlantResource" load_steps=5 format=3 uid="uid://3oemwwigbcxh"]
+[gd_resource type="Resource" script_class="PlantResource" load_steps=6 format=3 uid="uid://3oemwwigbcxh"]
 
 [ext_resource type="Script" uid="uid://ceep12fx8vbxm" path="res://resources/produce_resource.gd" id="1_frc1u"]
+[ext_resource type="PackedScene" uid="uid://dbrf2o5tdk4ru" path="res://scenes/grid/plants/components/gatherer_component.tscn" id="1_mdvmy"]
 [ext_resource type="Resource" uid="uid://ddqkftx2iike2" path="res://resources/data/plants/produce/construct_fruit.tres" id="2_2qu0y"]
 [ext_resource type="Script" uid="uid://fhdywgjfqixc" path="res://resources/plant_resource.gd" id="2_mo70d"]
 [ext_resource type="SpriteFrames" uid="uid://du8tekkean3yp" path="res://resources/data/plants/sprite_frames/construct_plant_sprite_frames.tres" id="3_mo70d"]
@@ -13,4 +14,7 @@ sprite_frames = ExtResource("3_mo70d")
 produce = Dictionary[ExtResource("1_frc1u"), int]({
 ExtResource("2_2qu0y"): 3
 })
+components = Array[PackedScene]([ExtResource("1_mdvmy")])
+type = 1
+affected_tiles = Array[Vector3i]([Vector3i(0, 0, 0), Vector3i(1, 0, 0), Vector3i(0, 0, 1), Vector3i(-1, 0, 0), Vector3i(0, 0, -1), Vector3i(2, 0, 0), Vector3i(1, 0, 1), Vector3i(0, 0, 2), Vector3i(-1, 0, 1), Vector3i(-2, 0, 0), Vector3i(-1, 0, -1), Vector3i(0, 0, -2), Vector3i(1, 0, -1), Vector3i(2, 0, 1), Vector3i(1, 0, 2), Vector3i(-1, 0, 2), Vector3i(-2, 0, 1), Vector3i(-2, 0, -1), Vector3i(-1, 0, -2), Vector3i(1, 0, -2), Vector3i(2, 0, -1)])
 metadata/_custom_type_script = "uid://fhdywgjfqixc"

@@ -8,3 +8,11 @@ class_name PlantResource
 # Dictionary of produce and amount to spawn
 @export var produce: Dictionary[ProduceResource, int]
 @export var components: Array[PackedScene]
+@export var type: PlantType
+
+enum PlantType {
+	Any,
+	Gatherer,
+}
+
+@export var affected_tiles: Array[Vector3i] = []

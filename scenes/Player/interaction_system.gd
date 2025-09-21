@@ -53,6 +53,7 @@ func highlight_hovered_tile(pos: Vector3) -> void:
 	for node in highlight_pooled_nodes:
 		highlight_pool.set_pooled_active(node, false)
 	highlight_pooled_nodes.clear()
+	cells.erase(highlighted_cell)
 	for cell in cells:
 		var node: Node3D = highlight_pool.get_pooled()
 		highlight_pooled_nodes.append(node)

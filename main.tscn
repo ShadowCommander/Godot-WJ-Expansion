@@ -375,6 +375,8 @@ total_plants_label = NodePath("../../HUD/HSplitContainer/TotalCount")
 
 [node name="Player" type="CharacterBody3D" parent="World" node_paths=PackedStringArray("sprite")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.041113257, 0)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("3_5vw27")
 sprite = NodePath("AnimatedSprite3D")
 move = ExtResource("3_efxa6")
@@ -416,7 +418,6 @@ metadata/_custom_type_script = "uid://csjccrhj5wnx7"
 
 [node name="SelectionHighlight" parent="World" instance=ExtResource("10_1u8w0")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.602, 0.001, 0)
-visible = false
 
 [node name="ParticleContainer" type="Node3D" parent="World"]
 

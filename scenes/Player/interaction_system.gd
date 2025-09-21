@@ -56,4 +56,4 @@ func on_harvest() -> void:
 	var produce_list = plant_grid_system.harvest(highlighted_cell)
 	for produce_resource: ProduceResource in produce_list:
 		var amount = produce_list[produce_resource]
-		%ShopPanelContainer.add_item(produce_resource.id, amount)
+		pass

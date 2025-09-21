@@ -49,25 +49,32 @@ func add_plant_to_cells(plant: Plant, cells: Array[Vector3i]) -> void:
 		internal_insert_plant(plant, cell)
 
 func remove_plant_from_cells(plant: Plant) -> void:
-	var cells: Array[Vector3i] = plant_to_grid.get(plant)
+	if not plant_to_grid.has(plant):
+		return
+	var cells: Array = plant_to_grid.get(plant)
 	if cells == null:
 		return
 	for cell: Vector3i in cells:
-		grid_to_plant.get(cell).erase(plant)
+		internal_erase_plant(plant, cell)
 	plant_to_grid.erase(plant)
 
-func remove_cell(cell: Vector3i) -> void:
-	var plants: Array[Plant] = grid_to_plant.get(cell)
-	if plants == null:
-		return
-	for plant: Plant in plants:
-		plant_to_grid.get(plant).erase(cell)
-	grid_to_plant.erase(cell)
+#func remove_cell(cell: Vector3i) -> void:
+	#var plants: Array[Plant] = grid_to_plant.get(cell)
+	#if plants == null:
+		#return
+	#for plant: Plant in plants:
+		#plant_to_grid.get(plant).erase(cell)
+	#grid_to_plant.erase(cell)
 
 func internal_erase_plant(plant: Plant, cell: Vector3i) -> void:
 	var offset_cell = cell # + plant.cell 
 	plant_to_grid[plant].erase(offset_cell)
+	if plant_to_grid[plant].size() == 0:
+		plant_to_grid.erase(plant)
 	grid_to_plant[offset_cell].erase(plant)
+	if grid_to_plant[offset_cell].size() == 0:
+		grid_to_plant.erase(offset_cell)
+	print("grid_to_plant: ", grid_to_plant.get(offset_cell))
 	var data: Dictionary = grid_data.get(offset_cell)
 	var type = plant.plant_resource.type
 	if data == null or not data.has(type):
@@ -81,6 +88,8 @@ func internal_erase_plant(plant: Plant, cell: Vector3i) -> void:
 
 func internal_insert_plant(plant: Plant, cell: Vector3i) -> void:
 	var offset_cell = cell # + plant.cell
+	if not plant_to_grid.has(plant):
+		return
 	var cells = plant_to_grid.get_or_add(plant, [])
 	if cells.has(offset_cell):
 		return

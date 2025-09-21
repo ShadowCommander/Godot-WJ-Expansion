@@ -104,6 +104,7 @@ func harvest(cell: Vector3i) -> Dictionary[ProduceResource, int]:
 		return {}
 	
 	var plant: Plant = plant_grid.get(cell)
+	lichen_system.remove_plant_from_cells(plant)
 	plant_grid.erase(cell)
 	
 	var produce = plant.plant_resource.produce

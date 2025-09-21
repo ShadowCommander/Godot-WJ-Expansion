@@ -385,7 +385,6 @@ metadata/_custom_type_script = "uid://csjccrhj5wnx7"
 
 [node name="SelectionHighlight" parent="World" instance=ExtResource("10_1u8w0")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.602, 0.001, 0)
-visible = false
 
 [node name="ParticleContainer" type="Node3D" parent="World"]
 

@@ -13,6 +13,7 @@ class_name PlantResource
 enum PlantType {
 	Any,
 	Gatherer,
+	Spreader,
 }
 
 @export var affected_tiles: Array[Vector3i] = []

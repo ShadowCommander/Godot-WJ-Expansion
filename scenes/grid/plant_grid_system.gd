@@ -73,8 +73,8 @@ func plant(plant_resource: PlantResource, cell: Vector3i) -> Plant:
 	
 	var planting_pos = get_cell_center(cell) + Vector3(randf_range(-planting_pos_rand.x, planting_pos_rand.x), 0, randf_range(-planting_pos_rand.z, planting_pos_rand.z))
 	plant.global_position = planting_pos
-	plant.plant_matured.connect(on_plant_matured, CONNECT_APPEND_SOURCE_OBJECT)
-	plant.cells_updated.connect(on_plant_matured, CONNECT_APPEND_SOURCE_OBJECT)
+	plant.plant_matured.connect(on_plant_matured.bind(plant))
+	plant.cells_updated.connect(on_cells_updated.bind(plant))
 	
 	for c: PackedScene in plant.plant_resource.components:
 		var comp: Component = c.instantiate()
@@ -116,7 +116,7 @@ func harvest(cell: Vector3i) -> Dictionary[ProduceResource, int]:
 #endregion
 
 func on_plant_matured(plant: Plant) -> void:
-	lichen_system.add_plant_to_cells(plant, plant.plant_resource.cells_affected)
+	lichen_system.add_plant_to_cells(plant, plant.cells_affected)
 	
 func on_cells_updated(plant: Plant) -> void:
-	lichen_system.add_plant_to_cells(plant, plant.plant_resource.cells_affected)
+	lichen_system.add_plant_to_cells(plant, plant.cells_affected)

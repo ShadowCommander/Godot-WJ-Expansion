@@ -27,10 +27,20 @@ func _physics_process(delta: float) -> void:
 		comp.update_time()
 
 func gather_lichen(comp: GathererComponent) -> void:
-	var cell = lichen_system.get_cells(comp.entity).pick_random()
-	if cell == null:
+	var cells = lichen_system.get_cells(comp.entity, PlantResource.PlantType.Spreader)
+	if cells == null or cells.is_empty():
 		return
+	#print("Cells nearby: ", cells.size())
+	#for cell in cells:
+		#spawn_particle(cell, comp.entity.global_position)
+	var cell: Vector3i
+	for i in range(1):
+		cell = cells.pick_random()
+		spawn_particle(cell, comp.entity.global_position)
+	# TODO Increase Construct fruit counter here
+		
+func spawn_particle(cell: Vector3i, spawn_pos: Vector3) -> void:
 	var particle: GathererParticle = GATHERER_PARTICLE.instantiate()
-	particle.start = comp.entity.global_position
-	particle.target = lichen_grid.map_to_local(cell)
+	particle.start = lichen_grid.map_to_local(cell)
+	particle.target = spawn_pos
 	particle_container.add_child(particle)

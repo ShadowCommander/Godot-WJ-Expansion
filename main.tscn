@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://dbqvf4v1f1djf"]
+[gd_scene load_steps=65 format=3 uid="uid://dbqvf4v1f1djf"]
 
 [ext_resource type="MeshLibrary" uid="uid://cy0jkyme5e54e" path="res://scenes/grid/mesh_library.tres" id="1_5vw27"]
 [ext_resource type="Script" uid="uid://n2b6xu6p3fsc" path="res://world.gd" id="1_dg77c"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="6_5vw27"]
 [ext_resource type="Shader" uid="uid://cvxxqj4pj5s5e" path="res://scripts/shaders/sky.gdshader" id="7_kek77"]
 [ext_resource type="Script" uid="uid://cixtt760l26dn" path="res://scenes/Player/interaction_system.gd" id="9_kek77"]
+[ext_resource type="PackedScene" uid="uid://b04x5fdaew4xq" path="res://scenes/Player/selection_highlight.tscn" id="10_1u8w0"]
 [ext_resource type="Resource" uid="uid://cy5fpgtv4j7un" path="res://resources/guide/toggle_shop.tres" id="11_82xsv"]
 [ext_resource type="Texture2D" uid="uid://b46oirp01iv7h" path="res://assets/textures/sprites/plants/ZenSeeds.png" id="12_a6jrf"]
 [ext_resource type="Texture2D" uid="uid://cx6oxxx8isncy" path="res://assets/textures/sprites/plants/ConstructSeeds.png" id="13_xuqvo"]
@@ -289,13 +290,6 @@ animations = [{
 [sub_resource type="Resource" id="Resource_kek77"]
 script = ExtResource("6_5vw27")
 
-[sub_resource type="QuadMesh" id="QuadMesh_vivmo"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vivmo"]
-transparency = 1
-albedo_color = Color(5.912981, 5.912981, 5.912981, 0.001)
-grow_amount = 0.615
-
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qsp4k"]
 streams_count = 3
 stream_0/stream = ExtResource("24_lswn8")
@@ -387,12 +381,13 @@ tween_resource = SubResource("Resource_kek77")
 follow_offset = Vector3(0, 3, 4)
 metadata/_custom_type_script = "uid://csjccrhj5wnx7"
 
-[node name="SelectionHighlight" type="MeshInstance3D" parent="World"]
+[node name="SelectionHighlight" parent="World" instance=ExtResource("10_1u8w0")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.602, 0.001, 0)
-mesh = SubResource("QuadMesh_vivmo")
-surface_material_override/0 = SubResource("StandardMaterial3D_vivmo")
+visible = false
 
 [node name="ParticleContainer" type="Node3D" parent="World"]
+
+[node name="HighlightContainer" type="Node3D" parent="World"]
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("5_kek77")
@@ -454,7 +449,7 @@ ground_grid = NodePath("../../World/GroundGridMap")
 plant_container = NodePath("../../World/PlantContainer")
 lichen_system = NodePath("../LichenGridSystem")
 
-[node name="InteractionSystem" type="Node" parent="Systems" node_paths=PackedStringArray("player", "selection_highlight", "cooldown_label")]
+[node name="InteractionSystem" type="Node" parent="Systems" node_paths=PackedStringArray("player", "selection_highlight", "lichen_system", "highlight_container")]
 script = ExtResource("9_kek77")
 look_absolute = ExtResource("14_vivmo")
 interact = ExtResource("16_2cqfq")
@@ -462,6 +457,8 @@ harvest = ExtResource("17_cegan")
 player = NodePath("../../World/Player")
 selection_highlight = NodePath("../../World/SelectionHighlight")
 cooldown_label = NodePath("../../HUD/HSplitContainer/CooldownLabel")
+lichen_system = NodePath("../LichenGridSystem")
+highlight_container = NodePath("../../World/HighlightContainer")
 
 [node name="LichenSpreadSystem" type="Node" parent="Systems" node_paths=PackedStringArray("grid", "ground_grid")]
 unique_name_in_owner = true

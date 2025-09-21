@@ -15,4 +15,5 @@ produce = Dictionary[ExtResource("1_tewh5"), int]({
 ExtResource("2_2bx6i"): 3
 })
 components = Array[PackedScene]([ExtResource("1_666ot")])
+type = 2
 metadata/_custom_type_script = "uid://fhdywgjfqixc"

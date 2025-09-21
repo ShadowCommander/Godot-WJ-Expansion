@@ -3,6 +3,7 @@ class_name GathererParticle
 
 var start: Vector3
 var target: Vector3
+var floor: float = 0
 var height: float = 0.2
 var time: float = 0.0
 var total_time: float = 3.0
@@ -23,6 +24,6 @@ func get_parabola_position() -> Vector3:
 	var ret: Vector3
 	
 	ret.x = start.x + (target.x - start.x) * p;
-	ret.y = start.y + (height - start.y) * (4 * p - 4 * p * p)
+	ret.y = floor + (height - floor) * (4 * p - 4 * p * p)
 	ret.z = start.z + (target.z - start.z) * p;
 	return ret

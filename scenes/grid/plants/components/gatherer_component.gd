@@ -3,7 +3,7 @@ class_name GathererComponent
 
 var value: int = 0
 var time: int = 0
-var delay: int = 200
+var delay: int = 1000
 
 func _ready() -> void:
 	entity.plant_matured.connect(on_plant_mature)

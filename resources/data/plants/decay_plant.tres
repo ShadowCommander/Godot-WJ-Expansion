@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="PlantResource" load_steps=5 format=3 uid="uid://dt6vj0gnyh77c"]
+[gd_resource type="Resource" script_class="PlantResource" load_steps=6 format=3 uid="uid://dt6vj0gnyh77c"]
 
+[ext_resource type="PackedScene" uid="uid://cxvbc10rnr3eq" path="res://scenes/grid/plants/components/lichen_spreader.tscn" id="1_666ot"]
 [ext_resource type="Script" uid="uid://ceep12fx8vbxm" path="res://resources/produce_resource.gd" id="1_tewh5"]
 [ext_resource type="Resource" uid="uid://ckfrv6bb3uqcf" path="res://resources/data/plants/produce/decay_fruit.tres" id="2_2bx6i"]
 [ext_resource type="Script" uid="uid://fhdywgjfqixc" path="res://resources/plant_resource.gd" id="2_12pnt"]
@@ -13,4 +14,5 @@ sprite_frames = ExtResource("4_666ot")
 produce = Dictionary[ExtResource("1_tewh5"), int]({
 ExtResource("2_2bx6i"): 3
 })
+components = Array[PackedScene]([ExtResource("1_666ot")])
 metadata/_custom_type_script = "uid://fhdywgjfqixc"

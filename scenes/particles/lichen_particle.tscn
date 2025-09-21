@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://8d1snc65k4j5"]
+
+[ext_resource type="Texture2D" uid="uid://uuvcin5rvig5" path="res://assets/textures/sprites/tiles/leaves_ground.png" id="1_vjgwu"]
+[ext_resource type="Script" uid="uid://c8eqte8xfmra7" path="res://scenes/particles/lichen_particle.gd" id="2_ravgw"]
+
+[node name="LichenParticle" type="Sprite3D"]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+billboard = 1
+texture_filter = 0
+texture = ExtResource("1_vjgwu")
+script = ExtResource("2_ravgw")

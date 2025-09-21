@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxvbc10rnr3eq"]
+
+[ext_resource type="Script" uid="uid://dmh2bikq6g4f8" path="res://scenes/grid/plants/components/lichen_spreader.gd" id="1_hupnq"]
+
+[node name="LichenSpreader" type="Node" groups=["LichenSpreaders"]]
+script = ExtResource("1_hupnq")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://dbqvf4v1f1djf"]
+[gd_scene load_steps=57 format=3 uid="uid://dbqvf4v1f1djf"]
 
 [ext_resource type="MeshLibrary" uid="uid://cy0jkyme5e54e" path="res://scenes/grid/mesh_library.tres" id="1_5vw27"]
 [ext_resource type="Script" uid="uid://n2b6xu6p3fsc" path="res://world.gd" id="1_dg77c"]
@@ -20,6 +20,7 @@
 [ext_resource type="Resource" uid="uid://cs4e7wytk7q8d" path="res://resources/guide/harvest.tres" id="17_cegan"]
 [ext_resource type="Script" uid="uid://jd2fisfw4t1g" path="res://lichen_spread_system.gd" id="17_yaehf"]
 [ext_resource type="Script" uid="uid://blliw7psk0h0r" path="res://random_plant_growth_system.gd" id="18_074og"]
+[ext_resource type="Script" uid="uid://4r62xopt74ae" path="res://scenes/grid/plants/lichen_spread_plant_system.gd" id="21_getpj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4c57u"]
 shader = ExtResource("7_kek77")
@@ -395,6 +396,8 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.60
 mesh = SubResource("QuadMesh_vivmo")
 surface_material_override/0 = SubResource("StandardMaterial3D_vivmo")
 
+[node name="ParticleContainer" type="Node3D" parent="World"]
+
 [node name="HUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("shop_menu")]
 script = ExtResource("5_kek77")
 shop_menu = NodePath("ShopPanelContainer")
@@ -444,3 +447,8 @@ ground_grid = NodePath("../../World/GroundGridMap")
 
 [node name="RandomPlantGrowthSystem" type="Node" parent="Systems"]
 script = ExtResource("18_074og")
+
+[node name="LichenSpreadPlantSystem" type="Node" parent="Systems" node_paths=PackedStringArray("lichen_grid", "particle_container")]
+script = ExtResource("21_getpj")
+lichen_grid = NodePath("../../World/LichenGridMap")
+particle_container = NodePath("../../World/ParticleContainer")

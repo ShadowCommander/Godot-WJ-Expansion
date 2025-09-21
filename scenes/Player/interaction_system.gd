@@ -57,10 +57,11 @@ func get_tile_toward_mouse() -> Vector2i:
 
 #region Interact
 const ZEN_PLANT = preload("uid://b6xi6g65y2i8j")
+const DECAY_PLANT = preload("uid://dt6vj0gnyh77c")
 
 
 func on_interact() -> void:
-	plant_grid_system.plant(ZEN_PLANT, highlighted_cell)
+	plant_grid_system.plant(DECAY_PLANT, highlighted_cell)
 
 func on_harvest() -> void:
 	var produce_list = plant_grid_system.harvest(highlighted_cell)

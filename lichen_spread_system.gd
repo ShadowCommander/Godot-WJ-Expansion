@@ -16,7 +16,8 @@ func _ready() -> void:
 	append_all_tiles_to_spread_to()
 
 func _physics_process(delta: float) -> void:
-	spread()
+	pass
+	#spread()
 
 
 func append_all_tiles_to_spread_to() -> void:

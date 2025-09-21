@@ -8,12 +8,13 @@ class_name Plant
 		
 
 var growth_timer: float
-var harvestable: bool = false
+var mature: bool = false
 
 	
 func _ready() -> void:
 	growth_timer = plant_resource.maturation_time
 	set_growth_frame()
+	frame_changed.connect(on_frame_changed)
 
 # Growth goes from max_life_stages to 0
 # Growth stages lerp from the seed, life stages, then fully mature at 0
@@ -31,5 +32,9 @@ func set_growth_frame() -> void:
 	var life_stage = ceil(lerped)
 	#print("weight: %0.2f, lerp: %0.2f, life stage: %d" % [value, lerped, life_stage])
 	if life_stage == 0:
-		harvestable = true
+		mature = true
 	frame = life_stage
+
+func on_frame_changed() -> void:
+	if material_override is ShaderMaterial:
+		material_override.set_shader_parameter("tex", sprite_frames.get_frame_texture(animation, frame))

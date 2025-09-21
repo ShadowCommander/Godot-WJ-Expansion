@@ -7,3 +7,4 @@ class_name PlantResource
 @export var sprite_frames: SpriteFrames
 # Dictionary of produce and amount to spawn
 @export var produce: Dictionary[ProduceResource, int]
+@export var components: Array[PackedScene]

@@ -77,6 +77,13 @@ func plant(plant_resource: PlantResource, cell: Vector3i) -> bool:
 	plant_container.add_child(plant)
 	var planting_pos = get_cell_center(cell) + Vector3(randf_range(-planting_pos_rand.x, planting_pos_rand.x), 0, randf_range(-planting_pos_rand.z, planting_pos_rand.z))
 	plant.global_position = planting_pos
+	
+	for c: PackedScene in plant.plant_resource.components:
+		var comp: Component = c.instantiate()
+		comp.entity = plant
+		comp.cell = cell
+		plant.add_child(comp)
+	
 	return true
 
 func harvest(cell: Vector3i) -> Dictionary[ProduceResource, int]:
@@ -89,7 +96,7 @@ func harvest(cell: Vector3i) -> Dictionary[ProduceResource, int]:
 	var produce = plant.plant_resource.produce
 	plant.queue_free()
 	
-	if not plant.harvestable:
+	if not plant.mature:
 		return {}
 	
 	return produce

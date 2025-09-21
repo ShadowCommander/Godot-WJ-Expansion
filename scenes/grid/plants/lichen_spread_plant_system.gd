@@ -2,11 +2,10 @@ extends Node
 
 const LICHEN_CELL_ID = 2
 
-# Adjacent is 4 directional (not 8)
+
 @export var lichen_grid: GridMap
 @export var particle_container: Node3D
 
-# Dictionary[Plant, Time of update]
 var timeline: Dictionary[Plant, int] = {}
 var plant_spread: Dictionary[Plant, Array]
 

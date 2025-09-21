@@ -1,34 +1,27 @@
 extends Node
 class_name LichenGridSystem
 
-# 2D array of lichen tiles
-# Use this to determine which tiles are supported by Decay
-# Use this to determine which tiles are near Construct
 
-# Dictionary[Vector3i, Array[Plant]]
 var grid_to_plant: Dictionary[Vector3i, Array] = {}
-# Dictionary[Plant, Array[Vector3i]]
+
 var plant_to_grid: Dictionary[Plant, Array] = {}
-# Count of plant types on a cell
-# Dictionary[Vector3i, Dictionary[PlantType, int]]
+
 var grid_data: Dictionary[Vector3i, Dictionary] = {}
 
 func add_plant_to_cells(plant: Plant, cells: Array[Vector3i]) -> void:
-	# Array[Vector3i]
-	#var plant_cells: Array = plant_to_grid.get_or_add(plant, [])
-	#plant_cells.append_array(cells)
+
 	var offset_cells: Array[Vector3i] = []
 	for cell in cells:
 		offset_cells.append(cell + plant.cell)
 	
 	for cell in offset_cells:
-		# Check if already contains cell
+
 		var validation = plant_to_grid.get(plant)
 		if validation != null and validation.has(cell):
 			continue
 			
 		if plant.plant_resource.type == PlantResource.PlantType.Gatherer:
-			# Array[Plant]
+
 			var plants: Array = grid_to_plant.get_or_add(cell, [])
 			var plant_to_replace: Plant = null
 			var is_other_gatherer: bool = false

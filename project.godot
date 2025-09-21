@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Expansion"
-run/main_scene="uid://bhxxylotaxx2l"
+run/main_scene="uid://dbqvf4v1f1djf"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 

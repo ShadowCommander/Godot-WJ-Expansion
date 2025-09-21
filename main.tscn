@@ -342,6 +342,8 @@ total_plants_label = NodePath("../../HUD/HSplitContainer/TotalCount")
 
 [node name="Player" type="CharacterBody3D" parent="World" node_paths=PackedStringArray("sprite")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.041113257, 0)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("3_5vw27")
 sprite = NodePath("AnimatedSprite3D")
 move = ExtResource("3_efxa6")

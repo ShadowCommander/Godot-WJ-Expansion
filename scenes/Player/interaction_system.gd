@@ -25,6 +25,8 @@ var old_highlight: Vector3i
 func _ready() -> void:
 	interact.triggered.connect(on_interact)
 	harvest.triggered.connect(on_harvest)
+	highlight_pool.set_pooled_node(SELECTION_HIGHLIGHT)
+	highlight_pool.container = highlight_container
 
 
 func _process(delta: float) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://dbqvf4v1f1djf"]
+[gd_scene load_steps=66 format=3 uid="uid://dbqvf4v1f1djf"]
 
 [ext_resource type="MeshLibrary" uid="uid://cy0jkyme5e54e" path="res://scenes/grid/mesh_library.tres" id="1_5vw27"]
 [ext_resource type="Script" uid="uid://n2b6xu6p3fsc" path="res://world.gd" id="1_dg77c"]
@@ -9,10 +9,11 @@
 [ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="5_272bh"]
 [ext_resource type="Script" uid="uid://bvuensdwm7vji" path="res://scenes/UI/hud.gd" id="5_kek77"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="6_5vw27"]
-[ext_resource type="PackedScene" uid="uid://bius36l10e1e1" path="res://scenes/UI/shop/simple_shop.tscn" id="7_4c57u"]
 [ext_resource type="Shader" uid="uid://cvxxqj4pj5s5e" path="res://scripts/shaders/sky.gdshader" id="7_kek77"]
 [ext_resource type="Script" uid="uid://cixtt760l26dn" path="res://scenes/Player/interaction_system.gd" id="9_kek77"]
 [ext_resource type="Resource" uid="uid://cy5fpgtv4j7un" path="res://resources/guide/toggle_shop.tres" id="11_82xsv"]
+[ext_resource type="Texture2D" uid="uid://b46oirp01iv7h" path="res://assets/textures/sprites/plants/ZenSeeds.png" id="12_a6jrf"]
+[ext_resource type="Texture2D" uid="uid://cx6oxxx8isncy" path="res://assets/textures/sprites/plants/ConstructSeeds.png" id="13_xuqvo"]
 [ext_resource type="Resource" uid="uid://gatsbse3jkwk" path="res://resources/guide/look_absolute.tres" id="14_vivmo"]
 [ext_resource type="PackedScene" uid="uid://dkr80d2pi0d41" path="res://addons/guide/debugger/guide_debugger.tscn" id="14_w48qg"]
 [ext_resource type="Script" uid="uid://c7b7wwdc8kkrl" path="res://scenes/grid/plant_grid_system.gd" id="15_vivmo"]
@@ -23,6 +24,10 @@
 [ext_resource type="Script" uid="uid://4r62xopt74ae" path="res://scenes/grid/plants/lichen_spread_plant_system.gd" id="21_getpj"]
 [ext_resource type="Script" uid="uid://d0fotmmcgniky" path="res://lichen_grid_system.gd" id="22_ryguw"]
 [ext_resource type="Script" uid="uid://dlt1kwi427vfu" path="res://scripts/gatherer_system.gd" id="23_d13ii"]
+[ext_resource type="AudioStream" uid="uid://hhpy3rbttxib" path="res://resources/music/calm waters.ogg" id="24_lswn8"]
+[ext_resource type="AudioStream" uid="uid://w5m3ujjlnq58" path="res://resources/music/suspense.ogg" id="25_a6jrf"]
+[ext_resource type="AudioStream" uid="uid://bo0eaeos2h3yb" path="res://resources/music/thinking while you collect plants.ogg" id="26_xuqvo"]
+[ext_resource type="Texture2D" uid="uid://00npx0sxiq8q" path="res://assets/textures/sprites/tree.png" id="28_xuqvo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4c57u"]
 shader = ExtResource("7_kek77")
@@ -45,6 +50,40 @@ volumetric_fog_density = 0.02
 volumetric_fog_sky_affect = 0.091
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_w48qg"]
+
+[sub_resource type="GDScript" id="GDScript_lswn8"]
+script/source = "extends Node3D
+
+@export var construct_count_label: Button
+@export var total_plants_label: Button
+
+func _ready():
+	child_entered_tree.connect(update_counts)
+	child_exiting_tree.connect(update_counts)
+	update_counts()
+
+func _physics_process(delta: float) -> void:
+	update_counts()
+func update_counts():
+	var construct_count = 0
+	var total_plants = 0
+	
+	for child in get_children():
+		if child.plant_resource != null:
+			if child.plant_resource.display_name == \"Decay\":
+				return
+			if child.plant_resource.display_name == \"Construct\":
+				construct_count += 1
+				Globals.constructCount = construct_count
+				total_plants += 1
+				Globals.totalCount = total_plants
+			else:
+				total_plants += 1
+				Globals.totalCount = total_plants
+	
+	construct_count_label.text = \"Constructs: \" + str(construct_count)
+	total_plants_label.text = \"Total Plants: \" + str(total_plants)
+"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lquwl"]
 height = 1.2565918
@@ -257,65 +296,17 @@ transparency = 1
 albedo_color = Color(5.912981, 5.912981, 5.912981, 0.001)
 grow_amount = 0.615
 
-[sub_resource type="GDScript" id="GDScript_5vw27"]
-script/source = "extends HBoxContainer
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qsp4k"]
+streams_count = 3
+stream_0/stream = ExtResource("24_lswn8")
+stream_1/stream = ExtResource("25_a6jrf")
+stream_2/stream = ExtResource("26_xuqvo")
 
-var shop_panel : Control = null
-var hotbar_buttons : Array[Button] = []
+[sub_resource type="GDScript" id="GDScript_kq58d"]
+script/source = "extends AudioStreamPlayer
 
-func _ready() -> void:
-	shop_panel = %ShopPanelContainer
-	call_deferred(\"setup_connection\")
-
-func setup_connection() -> void:
-	if shop_panel and shop_panel.inventory_manager:
-		shop_panel.inventory_manager.slot_modified.connect(_on_inventory_changed)
-		refresh_hotbar()
-	else:
-		call_deferred(\"setup_connection\")
-
-func _on_inventory_changed(_slot_number : int) -> void:
-	refresh_hotbar()
-
-func refresh_hotbar() -> void:
-	for button in hotbar_buttons:
-		if is_instance_valid(button):
-			button.queue_free()
-	hotbar_buttons.clear()
-
-	if not shop_panel or not shop_panel.inventory_manager:
-		return
-
-	var items_added : int = 0
-
-	for slot_number : int in shop_panel.inventory_manager.slots():
-		if shop_panel.inventory_manager.is_slot_empty(slot_number):
-			continue
-
-		var item_id : int = shop_panel.inventory_manager.get_slot_item_id(slot_number)
-		var item_amount : int = shop_panel.inventory_manager.get_slot_item_amount(slot_number)
-		var item_name : String = shop_panel.item_registry.get_name(item_id)
-		var item_icon : Texture2D = shop_panel.item_registry.get_icon(item_id)
-
-		if item_name == \"\" or item_icon == null:
-			continue
-
-		var skip_ids = [
-			shop_panel.item_ids.GOLD_COIN,
-			10
-		]
-		if item_id in skip_ids:
-			continue
-
-		var button : Button = Button.new()
-		button.text = str(item_amount)
-		button.icon = item_icon
-		button.custom_minimum_size = Vector2(60, 60)
-		button.tooltip_text = \"%s (%d)\" % [item_name, item_amount]
-
-		add_child(button)
-		hotbar_buttons.append(button)
-		items_added += 1
+func _on_finished() -> void:
+	self.play()
 "
 
 [node name="Main" type="Node"]
@@ -350,7 +341,10 @@ data = {
 "cells": PackedInt32Array(65535, 65535, 2, 65535, 0, 2, 0, 65535, 2, 0, 0, 2, 1, 65535, 2, 65535, 65534, 2, 65534, 65534, 2, 65534, 65535, 2, 65534, 0, 2, 65535, 1, 2, 0, 1, 2, 1, 0, 2, 2, 0, 2, 0, 2, 2, 65535, 2, 2, 65534, 2, 2, 65533, 2, 2, 65533, 1, 2, 65533, 0, 2, 65535, 3, 2, 65534, 1, 2, 1, 1, 2, 1, 2, 2, 1, 3, 0, 0, 3, 2, 65534, 3, 0, 65533, 3, 0, 2, 1, 2, 3, 1, 0, 3, 2, 0, 2, 3, 0, 2, 4, 0, 1, 4, 0, 0, 4, 0, 65535, 4, 0, 2, 65535, 2, 2, 2, 2, 65533, 4, 0, 65532, 3, 0, 65531, 3, 0, 65531, 2, 0, 65531, 1, 0, 65531, 0, 2, 65532, 0, 2, 65532, 65535, 2, 65533, 65535, 2, 65533, 65534, 2, 0, 65534, 2, 1, 65534, 2, 3, 65535, 2, 3, 0, 2, 65532, 1, 0, 65532, 2, 0, 65532, 4, 0, 3, 3, 0, 3, 4, 0, 2, 5, 0, 1, 5, 0, 0, 5, 0, 65535, 5, 0, 65534, 5, 0, 65533, 5, 0, 65529, 1, 0, 65529, 2, 0, 65529, 3, 0, 65529, 4, 0, 65529, 5, 0, 65529, 6, 0, 65530, 1, 0, 65530, 2, 0, 65530, 3, 0, 65530, 4, 0, 65530, 5, 0, 65530, 6, 0, 65531, 4, 0, 65531, 5, 0, 65531, 6, 0, 65532, 5, 0, 65532, 6, 0, 65533, 6, 0, 65534, 4, 0, 65534, 6, 0, 65535, 6, 0, 0, 6, 0, 1, 6, 0, 2, 6, 0, 3, 5, 0, 3, 6, 0, 4, 1, 0, 4, 2, 0, 4, 3, 0, 4, 4, 0, 4, 5, 0, 4, 6, 0, 65533, 65533, 2, 65534, 65533, 2, 65535, 65533, 2, 0, 65533, 2, 1, 65533, 2, 2, 65533, 2, 2, 65534, 2, 65535, 65532, 2, 1, 65532, 2)
 }
 
-[node name="PlantContainer" type="Node3D" parent="World"]
+[node name="PlantContainer" type="Node3D" parent="World" node_paths=PackedStringArray("construct_count_label", "total_plants_label")]
+script = SubResource("GDScript_lswn8")
+construct_count_label = NodePath("../../HUD/HSplitContainer/ConstructCount")
+total_plants_label = NodePath("../../HUD/HSplitContainer/TotalCount")
 
 [node name="Player" type="CharacterBody3D" parent="World" node_paths=PackedStringArray("sprite")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.041113257, 0)
@@ -400,25 +394,51 @@ surface_material_override/0 = SubResource("StandardMaterial3D_vivmo")
 
 [node name="ParticleContainer" type="Node3D" parent="World"]
 
-[node name="HUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("shop_menu")]
+[node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("5_kek77")
-shop_menu = NodePath("ShopPanelContainer")
 toggle_shop = ExtResource("11_82xsv")
 
-[node name="HotbarContainer" type="HBoxContainer" parent="HUD"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 496.0
-offset_bottom = -80.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-script = SubResource("GDScript_5vw27")
+[node name="HSplitContainer" type="HBoxContainer" parent="HUD"]
+offset_left = 25.0
+offset_top = 23.0
+offset_right = 478.0
+offset_bottom = 65.0
 
-[node name="ShopPanelContainer" parent="HUD" instance=ExtResource("7_4c57u")]
-unique_name_in_owner = true
-visible = false
+[node name="TextureRect2" type="TextureRect" parent="HUD/HSplitContainer"]
+layout_mode = 2
+texture = ExtResource("12_a6jrf")
+expand_mode = 2
+
+[node name="TotalCount" type="Button" parent="HUD/HSplitContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Total Plants:"
+
+[node name="TextureRect" type="TextureRect" parent="HUD/HSplitContainer"]
+layout_mode = 2
+texture = ExtResource("13_xuqvo")
+expand_mode = 2
+
+[node name="ConstructCount" type="Button" parent="HUD/HSplitContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Construct Plants:"
+alignment = 0
+
+[node name="VSeparator" type="VSeparator" parent="HUD/HSplitContainer"]
+layout_mode = 2
+
+[node name="CooldownLabel" type="Label" parent="HUD/HSplitContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD"]
+texture = ExtResource("13_xuqvo")
+expand_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/TextureRect"]
+layout_mode = 0
+texture = ExtResource("13_xuqvo")
+expand_mode = 2
 
 [node name="Debug Layer" type="CanvasLayer" parent="."]
 visible = false
@@ -434,13 +454,14 @@ ground_grid = NodePath("../../World/GroundGridMap")
 plant_container = NodePath("../../World/PlantContainer")
 lichen_system = NodePath("../LichenGridSystem")
 
-[node name="InteractionSystem" type="Node" parent="Systems" node_paths=PackedStringArray("player", "selection_highlight")]
+[node name="InteractionSystem" type="Node" parent="Systems" node_paths=PackedStringArray("player", "selection_highlight", "cooldown_label")]
 script = ExtResource("9_kek77")
 look_absolute = ExtResource("14_vivmo")
 interact = ExtResource("16_2cqfq")
 harvest = ExtResource("17_cegan")
 player = NodePath("../../World/Player")
 selection_highlight = NodePath("../../World/SelectionHighlight")
+cooldown_label = NodePath("../../HUD/HSplitContainer/CooldownLabel")
 
 [node name="LichenSpreadSystem" type="Node" parent="Systems" node_paths=PackedStringArray("grid", "ground_grid")]
 unique_name_in_owner = true
@@ -464,3 +485,289 @@ script = ExtResource("23_d13ii")
 lichen_system = NodePath("../LichenGridSystem")
 lichen_grid = NodePath("../../World/LichenGridMap")
 particle_container = NodePath("../../World/ParticleContainer")
+
+[node name="MusicLoop" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_qsp4k")
+autoplay = true
+script = SubResource("GDScript_kq58d")
+
+[node name="Trees" type="Node3D" parent="."]
+transform = Transform3D(-0.5, 0, 7.54979e-08, 0, 0.5, 0, -7.54979e-08, 0, -0.5, 0, -0.2684312, 0.34235477)
+
+[node name="Sprite3D" type="Sprite3D" parent="Trees"]
+transform = Transform3D(0.6938007, 0, -0.09295487, 0, 0.7, 0, 0.09295487, 0, 0.6938007, 0, 3.280087, 16.59349)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Trees"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 9.784951, 3.280087, 19.050373)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D3" type="Sprite3D" parent="Trees"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -7.9788313, 3.280087, 19.050373)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D4" type="Sprite3D" parent="Trees"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -7.9788313, 3.280087, 19.050373)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D5" type="Sprite3D" parent="Trees"]
+transform = Transform3D(0.7, 0, 0, 0, 0.923224, 0, 0, 0, 0.7, 2.9118443, 4.453398, 19.050373)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D6" type="Sprite3D" parent="Trees"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 17.722582, 3.280087, 19.050373)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D7" type="Sprite3D" parent="Trees"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -14.652136, 3.280087, 19.050373)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D8" type="Sprite3D" parent="Trees"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -14.652136, 3.280087, 14.789093)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D9" type="Sprite3D" parent="Trees"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -14.652136, 3.280087, 17.463837)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D10" type="Sprite3D" parent="Trees"]
+transform = Transform3D(0.80672455, 0, 0.12977454, 0, 0.9408441, 0, -0.15219888, 0, 0.68786526, -4.921006, 4.1986756, 17.463837)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D18" type="Sprite3D" parent="Trees"]
+transform = Transform3D(0.73565835, 0, -0.31069735, 0, 0.9408441, 0, 0.3643842, 0, 0.6272697, -20.566292, 4.1986756, 17.463837)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D11" type="Sprite3D" parent="Trees"]
+transform = Transform3D(0.9483355, 0, 0, 0, 1.0508437, 0, 0, 0, 0.7, -11.030541, 3.280087, 17.463837)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D12" type="Sprite3D" parent="Trees"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 6.7363157, 3.280087, 17.463837)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D13" type="Sprite3D" parent="Trees"]
+transform = Transform3D(0.75100636, 0, 0.30180976, 0, 0.8966208, 0, -0.3588716, 0, 0.6315939, 6.7363157, 3.280087, 14.809456)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D14" type="Sprite3D" parent="Trees"]
+transform = Transform3D(0.59521437, 0, 0.3684017, 0, 0.7, 0, -0.3684017, 0, 0.59521437, 13.026152, 3.280087, 14.809456)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D15" type="Sprite3D" parent="Trees"]
+transform = Transform3D(0.9957838, 0, 0.27063006, 0, 0.97833145, 0, -0.4174441, 0, 0.64556897, 15.612791, 4.7798553, 16.387362)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D16" type="Sprite3D" parent="Trees"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 21.740438, 3.280087, 16.387362)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D17" type="Sprite3D" parent="Trees"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 21.740438, 3.280087, 16.387362)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Trees2" type="Node3D" parent="."]
+transform = Transform3D(-0.5, 0, 7.54979e-08, 0, 0.5, 0, -7.54979e-08, 0, -0.5, -11.671883, -0.6542969, -1.4389496)
+
+[node name="Sprite3D" type="Sprite3D" parent="Trees2"]
+transform = Transform3D(0.6938007, 0, -0.09295487, 0, 0.7, 0, 0.09295487, 0, 0.6938007, 0, 3.280087, 16.59349)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Trees2"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 9.784951, 3.280087, 19.050373)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D3" type="Sprite3D" parent="Trees2"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -7.9788313, 3.280087, 19.050373)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D4" type="Sprite3D" parent="Trees2"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -7.9788313, 3.280087, 19.050373)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D5" type="Sprite3D" parent="Trees2"]
+transform = Transform3D(0.7, 0, 0, 0, 0.923224, 0, 0, 0, 0.7, 2.9118443, 4.453398, 19.050373)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D6" type="Sprite3D" parent="Trees2"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 17.722582, 3.280087, 19.050373)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D7" type="Sprite3D" parent="Trees2"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -14.652136, 3.280087, 19.050373)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D8" type="Sprite3D" parent="Trees2"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -14.652136, 3.280087, 14.789093)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D9" type="Sprite3D" parent="Trees2"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -14.652136, 3.280087, 17.463837)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D10" type="Sprite3D" parent="Trees2"]
+transform = Transform3D(0.80672455, 0, 0.12977454, 0, 0.9408441, 0, -0.15219888, 0, 0.68786526, -4.921006, 4.1986756, 17.463837)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D18" type="Sprite3D" parent="Trees2"]
+transform = Transform3D(0.73565835, 0, -0.31069735, 0, 0.9408441, 0, 0.3643842, 0, 0.6272697, -20.566292, 4.1986756, 17.463837)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D11" type="Sprite3D" parent="Trees2"]
+transform = Transform3D(0.9483355, 0, 0, 0, 1.0508437, 0, 0, 0, 0.7, -11.030541, 3.280087, 17.463837)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D12" type="Sprite3D" parent="Trees2"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 6.7363157, 3.280087, 17.463837)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D13" type="Sprite3D" parent="Trees2"]
+transform = Transform3D(0.75100636, 0, 0.30180976, 0, 0.8966208, 0, -0.3588716, 0, 0.6315939, 6.7363157, 3.280087, 14.809456)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D14" type="Sprite3D" parent="Trees2"]
+transform = Transform3D(0.59521437, 0, 0.3684017, 0, 0.7, 0, -0.3684017, 0, 0.59521437, 13.026152, 3.280087, 14.809456)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D15" type="Sprite3D" parent="Trees2"]
+transform = Transform3D(0.9957838, 0, 0.27063006, 0, 0.97833145, 0, -0.4174441, 0, 0.64556897, 15.612791, 4.7798553, 16.387362)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D16" type="Sprite3D" parent="Trees2"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 21.740438, 3.280087, 16.387362)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D17" type="Sprite3D" parent="Trees2"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 21.740438, 3.280087, 16.387362)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Trees3" type="Node3D" parent="."]
+transform = Transform3D(-0.5, 0, 7.54979e-08, 0, 0.5, 0, -7.54979e-08, 0, -0.5, 12.292528, -0.6542969, -1.4389496)
+
+[node name="Sprite3D" type="Sprite3D" parent="Trees3"]
+transform = Transform3D(0.6938007, 0, -0.09295487, 0, 0.7, 0, 0.09295487, 0, 0.6938007, 0, 3.280087, 16.59349)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Trees3"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 9.784951, 3.280087, 19.050373)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D3" type="Sprite3D" parent="Trees3"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -7.9788313, 3.280087, 19.050373)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D4" type="Sprite3D" parent="Trees3"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -7.9788313, 3.280087, 19.050373)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D5" type="Sprite3D" parent="Trees3"]
+transform = Transform3D(0.7, 0, 0, 0, 0.923224, 0, 0, 0, 0.7, 2.9118443, 4.453398, 19.050373)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D6" type="Sprite3D" parent="Trees3"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 17.722582, 3.280087, 19.050373)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D7" type="Sprite3D" parent="Trees3"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -14.652136, 3.280087, 19.050373)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D8" type="Sprite3D" parent="Trees3"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -14.652136, 3.280087, 14.789093)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D9" type="Sprite3D" parent="Trees3"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -14.652136, 3.280087, 17.463837)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D10" type="Sprite3D" parent="Trees3"]
+transform = Transform3D(0.80672455, 0, 0.12977454, 0, 0.9408441, 0, -0.15219888, 0, 0.68786526, -4.921006, 4.1986756, 17.463837)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D18" type="Sprite3D" parent="Trees3"]
+transform = Transform3D(0.73565835, 0, -0.31069735, 0, 0.9408441, 0, 0.3643842, 0, 0.6272697, -20.566292, 4.1986756, 17.463837)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D11" type="Sprite3D" parent="Trees3"]
+transform = Transform3D(0.9483355, 0, 0, 0, 1.0508437, 0, 0, 0, 0.7, -11.030541, 3.280087, 17.463837)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D12" type="Sprite3D" parent="Trees3"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 6.7363157, 3.280087, 17.463837)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D13" type="Sprite3D" parent="Trees3"]
+transform = Transform3D(0.75100636, 0, 0.30180976, 0, 0.8966208, 0, -0.3588716, 0, 0.6315939, 6.7363157, 3.280087, 14.809456)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D14" type="Sprite3D" parent="Trees3"]
+transform = Transform3D(0.59521437, 0, 0.3684017, 0, 0.7, 0, -0.3684017, 0, 0.59521437, 13.026152, 3.280087, 14.809456)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D15" type="Sprite3D" parent="Trees3"]
+transform = Transform3D(0.9957838, 0, 0.27063006, 0, 0.97833145, 0, -0.4174441, 0, 0.64556897, 15.612791, 4.7798553, 16.387362)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D16" type="Sprite3D" parent="Trees3"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 21.740438, 3.280087, 16.387362)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[node name="Sprite3D17" type="Sprite3D" parent="Trees3"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 21.740438, 3.280087, 16.387362)
+texture_filter = 2
+texture = ExtResource("28_xuqvo")
+
+[connection signal="finished" from="MusicLoop" to="MusicLoop" method="_on_finished"]

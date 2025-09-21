@@ -1,6 +1,9 @@
 # Godot Game Template
 For Godot 4.4 (4.3+ compatible)
 
+A branch specific for the [Godot Wild Jam](https://godotwildjam.com/)!  
+![GWJ Logo](/addons/maaacks_game_template/media/GWJ-Half-Logo-Orange.svg)  
+
 This template has a main menu, options menus, pause menu, credits, scene loader, extra tools, and an example game scene.  
 
 [Example on itch.io](https://maaack.itch.io/godot-game-template)  
@@ -82,12 +85,12 @@ Users that want a minimal set of features can try [Maaack's Menus Template](http
 ### Godot Asset Library
 This package is available as both a template and a plugin, meaning it can be used to start a new project, or added to an existing project. 
 
-![Package Icon](/addons/maaacks_game_template/media/game-icon-black-transparent-256x256.png)  
+![Package Icon](/addons/maaacks_game_template/media/GWJ-Icon-black-transparent-256x256.png)  
 
 When starting a new project:
 
 1.  Go to the `Asset Library Projects` tab.
-2.  Search for "Maaack's Game Template".
+2.  Search for "Maaack's Game Template". (Not GWJ specific)
 3.  Click on the result to open the template details.
 4.  Click to Download.
 5.  Give the project a new name and destination.
@@ -97,7 +100,7 @@ When starting a new project:
 When editing an existing project:
 
 1.  Go to the `AssetLib` tab.
-2.  Search for "Maaack's Game Template Plugin".
+2.  Search for "Maaack's GWJ Template".
 3.  Click on the result to open the plugin details.
 4.  Click to Download.
 5.  Check that contents are getting installed to `addons/` and there are no conflicts.
@@ -145,11 +148,13 @@ These instructions assume starting with just the contents of `addons/`. This wil
 [Loading Scenes](/addons/maaacks_game_template/docs/LoadingScenes.md)  
 [Input Icon Mapping](/addons/maaacks_game_template/docs/InputIconMapping.md)  
 [Joypad Inputs](/addons/maaacks_game_template/docs/JoypadInputs.md)  
+[Blending Music](/addons/maaacks_game_template/docs/BlendingMusic.md)  
 [Add Custom Options](/addons/maaacks_game_template/docs/AddingCustomOptions.md)  
 [Game Saving](/addons/maaacks_game_template/docs/GameSaving.md)  
 [How Parts Work](/addons/maaacks_game_template/docs/HowPartsWork.md)  
 [Uploading to itch.io](/addons/maaacks_game_template/docs/UploadingToItchIo.md)  
 [Automatic Updating](/addons/maaacks_game_template/docs/AutomaticUpdating.md)  
+[Exhibiting Your Game](/addons/maaacks_game_template/docs/Exhibiting.md)  
 
 ---
 

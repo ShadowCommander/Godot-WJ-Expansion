@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Expansion"
-run/main_scene="uid://dbqvf4v1f1djf"
+run/main_scene="uid://bhxxylotaxx2l"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -21,12 +21,13 @@ buses/default_bus_layout="res://maacks_examples/default_bus_layout.tres"
 
 [autoload]
 
-PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 GUIDE="*res://addons/guide/guide.gd"
+PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 AppConfig="*res://addons/maaacks_game_template/base/scenes/autoloads/app_config.tscn"
 SceneLoader="*res://addons/maaacks_game_template/base/scenes/autoloads/scene_loader.tscn"
 ProjectMusicController="*res://addons/maaacks_game_template/base/scenes/autoloads/project_music_controller.tscn"
 ProjectUISoundController="*res://addons/maaacks_game_template/base/scenes/autoloads/project_ui_sound_controller.tscn"
+Globals="*res://maacks_examples/scenes/Globals.tscn"
 
 [debug]
 

@@ -17,6 +17,7 @@ credits_packed_scene = ExtResource("4_t2uv2")
 
 [node name="BackgroundMusicPlayer" parent="." index="1"]
 stream = ExtResource("5_473ur")
+bus = &"Master"
 
 [node name="BackgroundTextureRect" parent="." index="2"]
 texture = ExtResource("6_uwo1s")

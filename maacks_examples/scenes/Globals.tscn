@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cj3qg45hjxyg4"]
+
+[ext_resource type="Script" uid="uid://cgsruycu4l4yv" path="res://maacks_examples/scenes/globals.gd" id="1_fwjcx"]
+
+[node name="Globals" type="Node"]
+script = ExtResource("1_fwjcx")

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ProduceResource" load_steps=3 format=3 uid="uid://bo4jt4y2dngv4"]
+
+[ext_resource type="Script" uid="uid://ceep12fx8vbxm" path="res://resources/produce_resource.gd" id="1_8kkbx"]
+[ext_resource type="Texture2D" uid="uid://dyggy5eocx14w" path="res://assets/textures/sprites/plants/ZenFruit.png" id="2_pbgid"]
+
+[resource]
+script = ExtResource("1_8kkbx")
+id = "zen"
+display_name = "Zen Fruit"
+texture = ExtResource("2_pbgid")
+metadata/_custom_type_script = "uid://ceep12fx8vbxm"
